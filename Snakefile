@@ -1,0 +1,151 @@
+configfile: "config.yaml"
+
+import os
+
+def output(file, output_dir = 'output'):
+  return os.path.join(output_dir, file)
+
+ruleorder: binarize_dict > binarize > learn_bpe
+
+rule all:
+  input:
+    dict_file=output('bin/dict.txt'),
+    dict_file_enc=output('bpe_enc/dict.txt'),
+    bpe_enc=expand(output('{dir}/{sample}'), 
+      dir=['bpe_enc','bin'], sample=['merges.txt', 'vocab.json']),
+    log=output('bin/preprocess.log'),
+    files=expand(output('bin/{sample}.{ext}'), 
+      sample=['train', 'test', 'valid'], ext=['bin', 'idx'])
+
+
+rule compile_rust:
+  output: 'scripts/prepare_datasets/target/release/prepare_datasets'
+  conda:
+    "envs/rust.yaml"
+  shell: "cargo build --release --manifest-path scripts/prepare_datasets/Cargo.toml"
+
+
+rule prepare_dataset:
+  input: 'scripts/prepare_datasets/target/release/prepare_datasets'
+  output: expand(output('raw/{sample}.raw'), sample=['train', 'test', 'valid'])
+  params:
+    num_lines=config['nun_docs_valid_test_set'],
+    output_raw=output('raw'),
+    in_file=config['in_file']
+  shell:
+    """
+      scripts/prepare_datasets/target/release/prepare_datasets \
+        --in {params.in_file} --out {params.output_raw} --num {params.num_lines}
+    """
+
+
+rule shuffle_file:
+  input:  '{sample}'.format(sample=config['in_file'])
+  output: output('bpe_train/shuffled_file.raw')
+  shell: "shuf {input} > {output}"
+
+
+rule get_bpe_extract:
+  input:  output('bpe_train/shuffled_file.raw')
+  output: output('bpe_train/train.raw')
+  params:
+    file_count=config['size_bpe_train_file']
+  shell: "dd if={input} of={output} count={params.file_count} iflag=skip_bytes,count_bytes"
+
+
+rule learn_bpe:
+  input: output('bpe_train/train.raw')
+  output: 
+    files=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt'])
+  conda:
+    "envs/bpe.yaml"
+  params:
+    vocab_size=config['vocab_size'],
+    dir_out=output('bpe_enc')
+  shell: "scripts/learn_bpe.py --input {input} --out {params.dir_out} --bpe_size {params.vocab_size}"
+
+
+rule apply_bpe:
+  input: 
+    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt']),
+    raw=output('raw/{sample}.raw')
+  output: output('bpe/{sample}.bpe')
+  conda:
+    "envs/bpe.yaml"
+  params:
+    dir_bpe=output('bpe_enc')
+  shell: "scripts/apply_bpe.py --bpe {params.dir_bpe} --out {output} {input.raw}"
+
+def enable_if_dict(wildcards):
+    if not os.path.exists(output('bpe_enc/dict.txt')):
+      return output('file_that_never_exists')
+    else:
+      return output('bpe_enc/dict.txt')
+
+# if using an already computed and used dict & bpe
+rule binarize_dict:
+  input:
+    dict_file=enable_if_dict,
+    bpe=expand(output('bpe/{sample}.bpe'), sample=['train', 'test', 'valid']),
+    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt'])
+  output:
+    dict_file=output('bin/dict.txt'),
+    log=output('bin/preprocess.log'),
+    files=expand(output('bin/{sample}.{ext}'), 
+      sample=['train', 'test', 'valid'], ext=['bin', 'idx'])
+  conda:
+    "envs/binarize.yaml"
+  params:
+    flag=output('flag/fix_dict.flag'),
+    dir_bpe=output('bpe'),
+    dir_bin=output('bin')
+  shell: "scripts/preprocess.sh {params.dir_bpe} {params.dir_bin}"
+
+
+# when binarizing without a pre-existing dict.txt, a new one will be created
+rule binarize:
+  input:
+    bpe=expand(output('bpe/{sample}.bpe'), sample=['train', 'test', 'valid'])
+  output:
+    dict_file=output('bin/dict.txt'),
+    log=output('bin/preprocess.log'),
+    files=expand(output('bin/{sample}.{ext}'), 
+      sample=['train', 'test', 'valid'], ext=['bin', 'idx'])
+  conda:
+    "envs/binarize.yaml"
+  params:
+    dir_bpe=output('bpe'),
+    dir_bin=output('bin')
+  shell: "scripts/preprocess.sh {params.dir_bpe} {params.dir_bin}"
+
+# if dict.txt exists never run this stream
+def block_if_dict(wildcards):
+    if os.path.exists(output('bpe_enc/dict.txt')):
+      return output('file_that_never_exists')
+    else:
+      return output('bin/dict.txt')
+
+rule patch_dict:
+  input:
+    dict_file=block_if_dict,
+    bpe_json=output('bpe_enc/vocab.json')
+  output: 
+    dict_backup=output('bin/dict.txt.bu'),
+    dict_file_bpe=output('bpe_enc/dict.txt')
+  conda: "envs/patch_dict.yaml"
+  params:
+    dir_bin=output('bin')
+  shell: """
+    scripts/patch_dict.py --dir {params.dir_bin} --vocab_json {input.bpe_json} \
+      && cp {input.dict_file} {output.dict_file_bpe}
+  """
+
+rule copy_bpe:
+  input:
+    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt'])
+  output: expand(output('bin/{sample}'), sample=['vocab.json', 'merges.txt']),
+  shell: """
+      arr_in=({input.bpe_enc})
+      arr_out=({output})
+      for i in 0 1; do cp ${{arr_in[$i]}} ${{arr_out[$i]}}; done
+    """

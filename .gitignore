@@ -1,0 +1,8 @@
+# snakemake folder
+.snakemake
+
+# snakemake results
+output/
+
+# rust builds
+scripts/*/target
