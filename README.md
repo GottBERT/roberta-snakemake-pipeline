@@ -10,4 +10,22 @@ GottBERT is a model architecture based on RoBERTa. It uses tokenizer from huggin
 For preprocessing of data continue reading [here](docs/preprocessing.md).
 
 ## Pre-Training
-For pre-training instructions, i.e. data preparaion, read [here](docs/pre-training.md).
+For pre-training instructions, i.e. computation of the GottBERT model, read [here](docs/pre-training.md).
+
+
+## License
+GottBERT is AGPL-v3 licensed.
+
+## Citation
+Please cite as:
+
+```
+@misc{scheible2020gottbert,
+      title={GottBERT: a pure German Language Model},
+      author={Raphael Scheible and Fabian Thomczyk and Patric Tippmann and Victor Jaravine and Martin Boeker},
+      year={2020},
+      eprint={2012.02110},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
