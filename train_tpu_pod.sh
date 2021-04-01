@@ -53,5 +53,5 @@ python -m torch_xla.distributed.xla_dist \
   --batch-size $MAX_SENTENCES --update-freq $UPDATE_FREQ \
   --skip-invalid-size-inputs-valid-test \
   --save-interval-updates $SAVE_INTERVAL_UPDATES \
-  --max-update $TOTAL_UPDATES &> training-$(date +"%Y-%m-%d_%H-%M-%S").log && \
-  (yes | gcloud compute instance-groups managed delete $GCLOUD_INSTANCE_GROUP --zone $GCLOUD_ZONE) 
+  --max-update $TOTAL_UPDATES &> training-$(date +"%Y-%m-%d_%H-%M-%S").log 
+  # &&  (yes | gcloud compute instance-groups managed delete $GCLOUD_INSTANCE_GROUP --zone $GCLOUD_ZONE) 
