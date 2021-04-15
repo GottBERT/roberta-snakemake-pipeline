@@ -1,0 +1,6 @@
+[submodule "tools/mosesdecoder"]
+	path = tools/mosesdecoder
+	url = https://github.com/moses-smt/mosesdecoder
+[submodule "scripts/filter_corpus/mosesdecoder"]
+	path = scripts/filter_corpus/mosesdecoder
+	url = https://github.com/moses-smt/mosesdecoder
