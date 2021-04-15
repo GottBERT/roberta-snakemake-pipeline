@@ -14,6 +14,7 @@ For pre-training instructions, i.e. computation of the GottBERT model, read [her
 
 ## Working with the resulting model
 After successfully pre-training a GottBERT model one can try it out with fairseq as described in [their documentation](https://github.com/pytorch/fairseq/blob/master/examples/gottbert/README.md).
+Another possibility is to convert the resulting model to transformer huggingface. 
 
 ## License
 GottBERT is AGPL-v3 licensed.
