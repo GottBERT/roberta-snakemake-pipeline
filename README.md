@@ -1,6 +1,6 @@
 # GottBERT
 
-GottBERT is a model architecture based on RoBERTa. It uses tokenizer from huggingface in order to compute a language specific GPT-2 BPE. This repository offers a snakemake workflow to pre-process data for a training with [fairseq](https://github.com/pytorch/fairseq).
+GottBERT is a model architecture based on RoBERTa. It uses tokenizer from huggingface in order to compute a language specific GPT-2 BPE. This repository offers a snakemake workflow to pre-process data for a subsequent training with [fairseq](https://github.com/pytorch/fairseq).
 
 ## Requirements
 - [anaconda](https://www.anaconda.com/products/individual#Downloads) or [miniconda](https://docs.conda.io/en/latest/miniconda.html)
@@ -12,6 +12,8 @@ For preprocessing of data continue reading [here](docs/preprocessing.md).
 ## Pre-Training
 For pre-training instructions, i.e. computation of the GottBERT model, read [here](docs/pre-training.md).
 
+## Working with the resulting model
+After successfully pre-training a GottBERT model one can try it out with fairseq as described in [their documentation](https://github.com/pytorch/fairseq/blob/master/examples/gottbert/README.md).
 
 ## License
 GottBERT is AGPL-v3 licensed.

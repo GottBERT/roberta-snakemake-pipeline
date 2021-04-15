@@ -4,6 +4,7 @@ The original RoBERTa used GPT2's BPE in order to encode data. Further, according
 ## Preparation
 In order to let this script run properly, you need to prepare you data as follows:
 - Create a file containing all of you data, per line one document.
+- [optional] if you don't want to compute a new GPT2-BPE but rely on a pre-existing one, place `dict.txt`, `merges.txt` and `vocab.json` into `output/bpe_enc/`.
 
 ## Usage
 According to our experience a test and valid set file of about 3-5 MB should be sufficient. In case of GottBERT we used 12000 documents.
@@ -12,11 +13,11 @@ According to our experience a test and valid set file of about 3-5 MB should be 
 In `files/example/de_dedup.txt` lies a file which is a small extract of the German OSCAR corpus. We can use it for a small test computation. In order to run the entire pipeline just run the following lines:
 
 ```bash
-snakemake --config in_file=files/example/de_dedup.txt nun_docs_valid_test_set=100 size_bpe_train_file=700 vocab_size=64 -j8
+snakemake --use-conda --config in_file=files/example/de_dedup.txt nun_docs_valid_test_set=100 size_bpe_train_file=700 vocab_size=64 -j8
 ```
 
 For furhter insrucitons about the config parameters, which we pass in the example per command line, read `config.yaml`. It's also possible to define all parameters there.
 
 The pipeline processes the depicted steps:
 
-![Image of Yaktocat](visualization.png)
+![Image of snakemake workflow](visualization.png)
