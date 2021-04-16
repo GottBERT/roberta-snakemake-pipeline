@@ -1,0 +1,17 @@
+# text language
+# supported languages:
+#  - German
+language: German
+
+# number of files, the main file will be split into,
+# which is used for parallel processing, 
+# we suggest, to take number of cores/threats (nproc --all)
+num_files: 8
+
+# lines of the input file
+# if you have a large file which number of lines are known, it saves you time to define it
+# otherwise, just use some number n<=0 and the workflow will count the lines for you
+file_lines: 0
+
+# path to the file, containing all data (one document per line), which should be filtered
+in_file: files/blob.txt

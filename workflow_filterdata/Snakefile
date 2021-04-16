@@ -1,11 +1,4 @@
-from snakemake.utils import min_version
-min_version("6.0")
-
-module preprocess_workflow:
-    snakefile: "./Snakefile"
-    # config: config["preprocess-workflow"]
-
-configfile: "config.yaml"
+configfile: "config/filter.yaml"
 
 from iso639 import languages
 import os
@@ -14,55 +7,90 @@ def output(file, output_dir = 'output'):
   return os.path.join(output_dir, file)
 
 rule all:
-  input: 
-    raw=expand(output('raw/{sample}.raw'), sample=['train', 'test', 'valid'])
+  input: output('filtered.raw')
 
 rule compile_rust:
   output: 
-    langdetect="scripts/langdetect/target/release/langdetect",
-    prepare_dataset="scripts/prepare_datasets/target/release/prepare_datasets"
+    langdetect="scripts/langdetect/target/release/langdetect"
   conda: "envs/rust.yaml"
   shell: """
     cargo build --release --manifest-path scripts/langdetect/Cargo.toml
   """
 
-use rule prepare_dataset from preprocess_workflow as prepare_dataset with:
-  input:
-    bin="scripts/prepare_datasets/target/release/prepare_datasets",
-    in_file=output("filtered_final.raw")
-
-
 rule split_file:
-  output: output("")
-  shell: ""
+  input: config['in_file']
+  output: expand(output("tmp/split_{part}.raw"), part=range(1,config['num_files']+1))
+  params:
+    n_digits=len(str(config['file_lines'])),
+    output=output("tmp/split_")
+  shell: """
+    # get lines of file
+    if [[ {config[file_lines]} -gt 0 ]]; then
+      total_lines={config[file_lines]}
+    else
+      total_lines=$(wc -l {config[in_file]} | cut -d" " -f1)
+    fi
+
+    # compute how many files to result the split to
+    ((lines_per_file = (total_lines + {config[num_files]}) / ({config[num_files]})))
+
+    # do the split
+    split \
+      --numeric-suffixes=1\
+      --suffix-length=1 \
+      --additional-suffix=".raw" \
+      --lines=$lines_per_file "{config[in_file]}" "{params.output}"
+  """
+
+# rule clean_content:
+#   input: ""
+#   output: ""
+#   shell: """
+#     scripts/clean_text.py -p "$f" \
+#             | grep -P -v '^\s*$' \
+#             | grep -P '.{50,}' \
+#             | grep -P -v '[|\t\[\]\{\}]' \
+#             | grep -P -v '\\{2,}' \
+#             | grep -P -v '\(en savoir plus\)' \
+#             | grep -P -v '(?:([-[\](){}><]+ *\w* *[-[\](){}><]+) *\w* *){5,}' \
+#             | grep -P -o '(^\p{Lu}|(?<=[.!?]\s))\p{Lu}.{50,}(\w\.|\s\!|\s\?)+' | grep -P -v '\d+ Fax|Tel \(' \
+#             | grep -P -v '[eE]mail|[fF]ax|[tT]éléphone|[tT]el|[cC]ontact|[i|I]nfo *[@:]+' \
+#             | grep -P -v '^:' \
+#             | grep -P -v '(\/ ){3,}|(\/){3,}' \
+#             | grep -P -v '[A-Za-z0-9]{25,}' \
+#             | grep -P -v '(\w{4,}\d{2,})|(\d{2,}\w{4,})' \
+#             | grep -P '^(?!.*(.)\1{5,})' \
+#             | grep -P '^(?!.*(..)\1{5,})' \
+#             | perl -CSD -Mutf8 -pe 's/\p{Sk}+|\p{So}+|\p{Cn}+|\p{Co}+|\p{Cs}+|\p{M}+|\p{Lo}+//g' \
+#           > {output}
+#   """
+
+# rule replace_unicode_punct:
+#   input: 
+#   output: output("")
+#   shell: "scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl"
 
 
-rule replace_unicode_punct:
-  input: 
-  output: output("")
-  shell: "scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl"
+# rule normalize_puntuation:
+#   input: 
+#   output: output("")
+#   shell: "scripts/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl"
 
 
-rule normalize_puntuation:
-  input: 
-  output: output("")
-  shell: "scripts/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl"
+# rule remove_non_printing_char:
+#   input: 
+#   output: output("")
+#   shell: "scripts/tokenizer/remove-non-printing-char.perl"
 
 
-rule remove_non_printing_char:
-  input: 
-  output: output("")
-  shell: "scripts/tokenizer/remove-non-printing-char.perl"
+# rule filter_documents:
+#   input: 
+#     bin="scripts/langdetect/target/release/langdetect"
+#   output:
+#   shell: ""
 
 
-rule filter_documents:
-  input: 
-    bin="scripts/langdetect/target/release/langdetect"
-  output:
-  shell: ""
-
-
-rule merge_files:
-  input:
-  output: output("")
-  shell: ""
+# rule merge_files:
+#   input:
+#   output: output("")
+#   shell: ""
