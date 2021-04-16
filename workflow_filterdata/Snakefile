@@ -1,0 +1,68 @@
+from snakemake.utils import min_version
+min_version("6.0")
+
+module preprocess_workflow:
+    snakefile: "./Snakefile"
+    # config: config["preprocess-workflow"]
+
+configfile: "config.yaml"
+
+from iso639 import languages
+import os
+
+def output(file, output_dir = 'output'):
+  return os.path.join(output_dir, file)
+
+rule all:
+  input: 
+    raw=expand(output('raw/{sample}.raw'), sample=['train', 'test', 'valid'])
+
+rule compile_rust:
+  output: 
+    langdetect="scripts/langdetect/target/release/langdetect",
+    prepare_dataset="scripts/prepare_datasets/target/release/prepare_datasets"
+  conda: "envs/rust.yaml"
+  shell: """
+    cargo build --release --manifest-path scripts/langdetect/Cargo.toml
+  """
+
+use rule prepare_dataset from preprocess_workflow as prepare_dataset with:
+  input:
+    bin="scripts/prepare_datasets/target/release/prepare_datasets",
+    in_file=output("filtered_final.raw")
+
+
+rule split_file:
+  output: output("")
+  shell: ""
+
+
+rule replace_unicode_punct:
+  input: 
+  output: output("")
+  shell: "scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl"
+
+
+rule normalize_puntuation:
+  input: 
+  output: output("")
+  shell: "scripts/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl"
+
+
+rule remove_non_printing_char:
+  input: 
+  output: output("")
+  shell: "scripts/tokenizer/remove-non-printing-char.perl"
+
+
+rule filter_documents:
+  input: 
+    bin="scripts/langdetect/target/release/langdetect"
+  output:
+  shell: ""
+
+
+rule merge_files:
+  input:
+  output: output("")
+  shell: ""

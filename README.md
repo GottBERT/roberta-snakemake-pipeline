@@ -7,10 +7,10 @@ GottBERT is a model architecture based on RoBERTa. It uses tokenizer from huggin
 - [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html)
 
 ## Data Preparation
-For preprocessing of data continue reading [here](docs/preprocessing.md).
+For preprocessing of data continue reading [here](workflow_preprocess/README.md).
 
 ## Pre-Training
-For pre-training instructions, i.e. computation of the GottBERT model, read [here](docs/pre-training.md).
+For pre-training instructions, i.e. computation of the GottBERT model, read [here](pre-training/README.md).
 
 ## Working with the resulting model
 After successfully pre-training a GottBERT model one can try it out with fairseq as described in [their documentation](https://github.com/pytorch/fairseq/blob/master/examples/gottbert/README.md).
@@ -20,7 +20,7 @@ Another possibility is to convert the resulting model to transformer huggingface
 GottBERT is AGPL-v3 licensed.
 
 ## Citation
-Please cite as:
+If you are using this code or our model, please cite as:
 
 ```
 @misc{scheible2020gottbert,
