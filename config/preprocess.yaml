@@ -14,3 +14,6 @@ size_bpe_train_file: 40000000000
 # supported languages:
 #  - German
 language: German
+
+# output directory, relative from the workflow folder
+dir_output: '../output'

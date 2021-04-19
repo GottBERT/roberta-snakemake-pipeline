@@ -15,3 +15,6 @@ num_files: 8
 # if you have a large file which number of lines are known, it saves you time to define it
 # otherwise, just use some number n<=0 and the workflow will count the lines for you
 file_lines: 0
+
+# output directory, relative from the workflow folder
+dir_output: '../output'

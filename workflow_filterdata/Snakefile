@@ -1,9 +1,9 @@
-configfile: "config/filter.yaml"
+configfile: "../config/filter.yaml"
 
 from iso639 import languages
 import os
 
-def output(file, output_dir = 'output'):
+def output(file, output_dir = config['dir_output']):
   return os.path.join(output_dir, file)
 
 rule all:
@@ -14,7 +14,9 @@ rule compile_rust:
     langdetect="scripts/langdetect/target/release/langdetect"
   conda: "envs/rust.yaml"
   shell: """
-    cargo build --release --manifest-path scripts/langdetect/Cargo.toml
+    # using the conda installed linker
+    CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-conda_cos6-linux-gnu-cc \
+      cargo build --release --manifest-path scripts/langdetect/Cargo.toml
   """
 
 rule split_file:
