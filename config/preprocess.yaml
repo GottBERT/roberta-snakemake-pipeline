@@ -1,8 +1,8 @@
-# how many bpe tokens should be user
-vocab_size: 52000
-
 # path to the in file, containing all data (one document per line)
 in_file: files/blob.txt
+
+# how many bpe tokens should be user
+vocab_size: 52000
 
 # number of randomly selected documents for the validation & test set
 nun_docs_valid_test_set: 12000

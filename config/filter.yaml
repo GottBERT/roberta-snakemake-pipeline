@@ -1,3 +1,6 @@
+# path to the file, containing all data (one document per line), which should be filtered
+in_file: files/blob.txt
+
 # text language
 # supported languages:
 #  - German
@@ -12,6 +15,3 @@ num_files: 8
 # if you have a large file which number of lines are known, it saves you time to define it
 # otherwise, just use some number n<=0 and the workflow will count the lines for you
 file_lines: 0
-
-# path to the file, containing all data (one document per line), which should be filtered
-in_file: files/blob.txt
