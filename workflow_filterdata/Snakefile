@@ -1,4 +1,4 @@
-configfile: "../config/filter.yaml"
+configfile: "config.yaml"
 
 from iso639 import languages
 import os
