@@ -18,3 +18,24 @@ file_lines: 0
 
 # output directory, relative from the workflow folder
 dir_output: '../output'
+
+# quality threashold for language detection
+# the higher, the more accurate the language confimity must be
+whatlang_threashold: 1.0
+
+# minimal tokens a document should have; documents with less tokens are filtered out.
+min_tokens: 40
+
+# in order to filter meaningless spam, we compute a stopword ratio
+#  len(token(document_without_stopwords))/len(token(document))
+# the higher the ratio, less stopwords, which is often the case in spam lists.
+# We filter out all documents with a ratio >= threshold.
+threshold_stopword: 0.9
+
+# A token ratio is computed by 
+#  len(set(token(document_without_stopwords)))/len(token(document))
+# which reflects the repetition of words. 
+# The higher the score, the more words besides stopwords, are used,
+# which usually reflects a higher variance of the document.
+# We filter out all documents with a ratio <= threshold.
+threshold_token: 0.4

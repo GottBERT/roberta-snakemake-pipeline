@@ -36,22 +36,6 @@ def normalize_unicode(text):
     return text
 
 
-def read_codepage(text, codepage='cp863'):
-    """
-    Keep only characters belonging to the character set of a language
-
-    Args: 
-    -- text: input text
-    -- code page: for each language.
-    Example: Code page 863 is the code page used to write French Canadian language.
-    https://www.ascii-codes.com/cp863.html
-    """
-    text = text.encode(codepage, "ignore").decode(codepage)
-    text = text.encode('utf-8').decode('utf-8')
-
-    return text
-
-
 def rm_spaces(text):
     """
     Remove multiple spaces
@@ -72,7 +56,7 @@ def process_url_html(text):
     return text
 
 
-def cleaner(text, rm_new_lines=False, do_lower=False):
+def cleaner(text, rm_new_lines=True, do_lower=False):
     """
     Clean up an input text
     """

@@ -7,7 +7,10 @@ def output(file, output_dir = config['dir_output']):
   return os.path.join(output_dir, file)
 
 rule all:
-  input: output('filtered.raw')
+  input: 
+    result=output('filtered.txt'),
+    fail=output('fail.txt'),
+    doc_count=output('count.txt')
 
 rule compile_rust:
   output: 
@@ -21,7 +24,7 @@ rule compile_rust:
 
 rule split_file:
   input: config['in_file']
-  output: expand(output("tmp/split_{part}.raw"), part=range(1,config['num_files']+1))
+  output: expand(output("tmp/split_{part}.txt"), part=range(1,config['num_files']+1))
   params:
     n_digits=len(str(config['file_lines'])),
     output=output("tmp/split_")
@@ -40,59 +43,52 @@ rule split_file:
     split \
       --numeric-suffixes=1\
       --suffix-length=1 \
-      --additional-suffix=".raw" \
+      --additional-suffix=".txt" \
       --lines=$lines_per_file "{config[in_file]}" "{params.output}"
   """
 
-# rule clean_content:
-#   input: ""
-#   output: ""
-#   shell: """
-#     scripts/clean_text.py -p "$f" \
-#             | grep -P -v '^\s*$' \
-#             | grep -P '.{50,}' \
-#             | grep -P -v '[|\t\[\]\{\}]' \
-#             | grep -P -v '\\{2,}' \
-#             | grep -P -v '\(en savoir plus\)' \
-#             | grep -P -v '(?:([-[\](){}><]+ *\w* *[-[\](){}><]+) *\w* *){5,}' \
-#             | grep -P -o '(^\p{Lu}|(?<=[.!?]\s))\p{Lu}.{50,}(\w\.|\s\!|\s\?)+' | grep -P -v '\d+ Fax|Tel \(' \
-#             | grep -P -v '[eE]mail|[fF]ax|[tT]éléphone|[tT]el|[cC]ontact|[i|I]nfo *[@:]+' \
-#             | grep -P -v '^:' \
-#             | grep -P -v '(\/ ){3,}|(\/){3,}' \
-#             | grep -P -v '[A-Za-z0-9]{25,}' \
-#             | grep -P -v '(\w{4,}\d{2,})|(\d{2,}\w{4,})' \
-#             | grep -P '^(?!.*(.)\1{5,})' \
-#             | grep -P '^(?!.*(..)\1{5,})' \
-#             | perl -CSD -Mutf8 -pe 's/\p{Sk}+|\p{So}+|\p{Cn}+|\p{Co}+|\p{Cs}+|\p{M}+|\p{Lo}+//g' \
-#           > {output}
-#   """
+rule clean_content:
+  input: output("tmp/split_{part}.txt")
+  output: temp(output("tmp/clean_{part}.txt"))
+  shell: """
+    scripts/clean_it.sh {input} \
+      | scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl \
+      | scripts/mosesdecoder/scripts/tokenizer/remove-non-printing-char.perl > {output}
+  """
 
-# rule replace_unicode_punct:
-#   input: 
-#   output: output("")
-#   shell: "scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl"
+rule filter_documents:
+  input: 
+    bin="scripts/langdetect/target/release/langdetect",
+    data=output("tmp/clean_{part}.txt")
+  output: 
+    success=temp(output("tmp/clean_{part}.success")),
+    fail=temp(output("tmp/clean_{part}.fail")),
+    doc_count=temp(output("tmp/clean_{part}.count"))
+  shell: "{input.bin} -i {input.data} -s {output.success} \
+    -f {output.fail} -c {output.doc_count} -l {config[language]} -t {config[whatlang_threashold]}"
 
-
-# rule normalize_puntuation:
-#   input: 
-#   output: output("")
-#   shell: "scripts/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl"
+rule filter_content:
+  input: output("tmp/clean_{part}.success")
+  output: temp(output("tmp/clean_{part}.final"))
+  conda: "envs/filter.yaml"
+  script: """
+    sctips/token_based_filter.py {input} {output} \
+      {config[language]} {config[threshold_token]} \
+      {config[threshold_stopword]} {config[min_tokens]}
+  """
 
 
-# rule remove_non_printing_char:
-#   input: 
-#   output: output("")
-#   shell: "scripts/tokenizer/remove-non-printing-char.perl"
-
-
-# rule filter_documents:
-#   input: 
-#     bin="scripts/langdetect/target/release/langdetect"
-#   output:
-#   shell: ""
-
-
-# rule merge_files:
-#   input:
-#   output: output("")
-#   shell: ""
+rule merge_files:
+  input: 
+    final=expand(output("tmp/clean_{part}.final"), part=range(1,config['num_files']+1)),
+    doc_count=expand(output("tmp/clean_{part}.count"), part=range(1,config['num_files']+1)),
+    fail=expand(output("tmp/clean_{part}.fail"), part=range(1,config['num_files']+1))
+  output: 
+    final=output("filtered.txt"),
+    fail=output("fail.txt"),
+    doc_count=output("count.txt")
+  shell: """
+    (cat {input.final} > {output.final}) &
+    (cat {input.doc_count} > {output.doc_count}) &
+    (cat {input.fail} > {output.fail}) &
+  """
