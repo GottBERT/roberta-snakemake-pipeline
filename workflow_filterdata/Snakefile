@@ -67,12 +67,13 @@ rule filter_documents:
   shell: "{input.bin} -i {input.data} -s {output.success} \
     -f {output.fail} -c {output.doc_count} -l {config[language]} -t {config[whatlang_threashold]}"
 
+
 rule filter_content:
   input: output("tmp/clean_{part}.success")
   output: temp(output("tmp/clean_{part}.final"))
   conda: "envs/filter.yaml"
-  script: """
-    sctips/token_based_filter.py {input} {output} \
+  shell: """
+    scripts/token_based_filter.py {input} {output} \
       {config[language]} {config[threshold_token]} \
       {config[threshold_stopword]} {config[min_tokens]}
   """
