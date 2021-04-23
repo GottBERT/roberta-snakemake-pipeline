@@ -11,6 +11,8 @@ out_file = "output/filtered_final.txt"
 language = "German"
 threshold_token = 0.4
 threshold_stopword = 0.9
+threshold_punctuation = 0.4
+threshold_upper = 1.0
 min_tokens = 40
 
 
@@ -18,11 +20,14 @@ df_result = pd.DataFrame(columns=["filtered_tokens",
                                   "original_tokens",
                                   "original_text",
                                   "stopword_ratio",
+                                  "punctuation_ratio",
                                   "#tokens_original", 
-                                  "#tokens_filtered", 
+                                  "#tokens_filtered",
+                                  "#tokens_puctuation",
                                   "token_ratio",
-                                  ""])
-
+                                  "#token_upper",
+                                  "upper_ratio"])
+word_tokenizer = nltk.RegexpTokenizer(r"\w+")
 stop_words = set(nltk.corpus.stopwords.words(language.lower()))
 
 with open(in_file, mode="r", encoding="utf-8") as f_in:
@@ -39,18 +44,38 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
         
         num_unique_tokens_filtered = len(set(filtered_sentence))
         num_tokens_original = len(word_tokens)
+        
+        words = word_tokenizer.tokenize(document)
+        punctuation = [w for w in word_tokens if not w in words]
+        
+        upper = [w for w in word_tokens if w[0].isupper()]
+    
+      
+        num_punctuation = len(punctuation)
+        
+        punctuation_ratio = num_punctuation/num_tokens_original
       
         token_ratio = num_unique_tokens_filtered/num_tokens_original
         
+        if num_punctuation > 0:
+          num_upper = len(upper)
+          upper_ratio = num_upper/num_punctuation
+        else:
+          upper_ratio = 0
+      
         if num_tokens_original > 0:
           df_result = df_result.append({
               "filtered_tokens": " ".join(filtered_sentence),
               "original_tokens": " ".join(word_tokens),
               "original_text": document.rstrip('\n'),
               "stopword_ratio": stopword_ratio,
+              "punctuation_ratio": punctuation_ratio,
               "#tokens_original": num_tokens_original,
               "#tokens_filtered": num_unique_tokens_filtered,
-              "token_ratio": token_ratio
+              "#tokens_puctuation": num_punctuation,
+              "token_ratio": token_ratio,
+              "#token_upper": num_upper,
+              "upper_ratio": upper_ratio
             }, ignore_index=True)
 
 
@@ -60,7 +85,9 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
 # save it
 df_filtered = df_result[
     (df_result['token_ratio'].astype('float') > threshold_token) &
-    (df_result['stopword_ratio'].astype('float') < threshold_stopword)
+    (df_result['stopword_ratio'].astype('float') < threshold_stopword) &
+    (df_result['punctuation_ratio'].astype('float') < threshold_punctuation) & 
+    (df_result['upper_ratio'].astype('float') >= threshold_upper)
 ]['original_text']
 #df_filtered.to_csv(out_file, quoting=csv.QUOTE_NONE, sep=' ', index=False, header=False)
 
