@@ -97,7 +97,7 @@ rule merge_files:
     fail=output("fail.txt"),
     doc_count=output("count.txt")
   shell: r"""
-    (cat {input.final} > {output.final}) &
-    (cat {input.doc_count} > {output.doc_count}) &
-    (cat {input.fail} > {output.fail}) &
+    cat {input.final} > {output.final}
+    awk '{{print $0}}' {input.doc_count} > {output.doc_count}
+    cat {input.fail} > {output.fail}
   """
