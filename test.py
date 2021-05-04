@@ -2,12 +2,13 @@ import pandas as pd
 import numpy as np
 import nltk
 import csv
-
+import pickle
 
 nltk.download("stopwords")
 
 in_file = "output/filtered.txt"
 out_file = "output/filtered_final.txt"
+pickle_out = "output/result.pickle"
 language = "German"
 threshold_token = 0.4
 threshold_stopword = 0.9
@@ -26,7 +27,8 @@ df_result = pd.DataFrame(columns=["filtered_tokens",
                                   "#tokens_puctuation",
                                   "token_ratio",
                                   "#token_upper",
-                                  "upper_ratio"])
+                                  "upper_ratio",
+                                  "upper_to_punct_ratio"])
 word_tokenizer = nltk.RegexpTokenizer(r"\w+")
 stop_words = set(nltk.corpus.stopwords.words(language.lower()))
 
@@ -56,12 +58,15 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
         punctuation_ratio = num_punctuation/num_tokens_original
       
         token_ratio = num_unique_tokens_filtered/num_tokens_original
+
+        num_upper = len(upper)
         
-        if num_punctuation > 0:
-          num_upper = len(upper)
-          upper_ratio = num_upper/num_punctuation
+        if num_punctuation > 0:  
+          upper_to_punct_ratio = num_upper/num_punctuation
         else:
           upper_ratio = 0
+      
+        upper_ratio = num_upper/num_tokens_original
       
         if num_tokens_original > 0:
           df_result = df_result.append({
@@ -75,7 +80,8 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
               "#tokens_puctuation": num_punctuation,
               "token_ratio": token_ratio,
               "#token_upper": num_upper,
-              "upper_ratio": upper_ratio
+              "upper_ratio": upper_ratio,
+              "upper_to_punct_ratio": upper_to_punct_ratio
             }, ignore_index=True)
 
 
@@ -88,12 +94,14 @@ df_filtered = df_result[
     (df_result['stopword_ratio'].astype('float') < threshold_stopword) &
     (df_result['punctuation_ratio'].astype('float') < threshold_punctuation) & 
     (df_result['upper_ratio'].astype('float') >= threshold_upper)
-]['original_text']
-#df_filtered.to_csv(out_file, quoting=csv.QUOTE_NONE, sep=' ', index=False, header=False)
+]
 
-np.savetxt(out_file, df_filtered.values, fmt='%s', delimiter='', encoding='utf-8')
+# save to file
+np.savetxt(out_file, df_filtered['original_text'].values, fmt='%s', delimiter='', encoding='utf-8')
 
-
+# pickle dump
+with open(pickle_out,'wb') as f_pickle:
+  pickle.dump(df_result,f_pickle)
 
 
 #stanza.download('de')
