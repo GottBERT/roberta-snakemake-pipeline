@@ -16,7 +16,7 @@ rule compile_rust:
   output: 
     langdetect="scripts/langdetect/target/release/langdetect"
   conda: "envs/rust.yaml"
-  shell: """
+  shell: r"""
     # using the conda installed linker
     CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-conda_cos6-linux-gnu-cc \
       cargo build --release --manifest-path scripts/langdetect/Cargo.toml
@@ -26,9 +26,8 @@ rule split_file:
   input: config['in_file']
   output: expand(output("tmp/split_{part}.txt"), part=range(1,config['num_files']+1))
   params:
-    n_digits=len(str(config['num_files'])),
     output=output("tmp/split_")
-  shell: """
+  shell: r"""
     # get lines of file
     if [[ {config[file_lines]} -gt 0 ]]; then
       total_lines={config[file_lines]}
@@ -42,15 +41,24 @@ rule split_file:
     # do the split
     split \
       --numeric-suffixes=1\
-      --suffix-length={params.n_digits} \
       --additional-suffix=".txt" \
       --lines=$lines_per_file "{config[in_file]}" "{params.output}"
+
+    # rename files, i.e. form split_0001000.txt to split_1000.txt
+    for file in {params.output}*
+    do
+      new_name=$(echo $file | sed -E 's/(.+_)0*([1-9].*)/\1\2/')
+      
+      if [[ ! -f $new_name ]]; then
+        mv $file $new_name
+      fi
+    done
   """
 
 rule clean_content:
   input: output("tmp/split_{part}.txt")
   output: temp(output("tmp/clean_{part}.txt"))
-  shell: """
+  shell: r"""
     scripts/clean_it.sh {input} \
       | scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl \
       | scripts/mosesdecoder/scripts/tokenizer/remove-non-printing-char.perl > {output}
@@ -72,7 +80,7 @@ rule filter_content:
   input: output("tmp/clean_{part}.success")
   output: temp(output("tmp/clean_{part}.final"))
   conda: "envs/filter.yaml"
-  shell: """
+  shell: r"""
     scripts/token_based_filter.py {input} {output} \
       {config[language]} {config[threshold_token]} \
       {config[threshold_stopword]} {config[min_tokens]}
@@ -88,7 +96,7 @@ rule merge_files:
     final=output("filtered.txt"),
     fail=output("fail.txt"),
     doc_count=output("count.txt")
-  shell: """
+  shell: r"""
     (cat {input.final} > {output.final}) &
     (cat {input.doc_count} > {output.doc_count}) &
     (cat {input.fail} > {output.fail}) &
