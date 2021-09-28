@@ -16,7 +16,7 @@ For pre-training instructions, i.e. computation of the GottBERT model, read [her
 After successfully pre-training a GottBERT model one can try it out with fairseq as described in [their documentation](https://github.com/pytorch/fairseq/blob/master/examples/gottbert/README.md).
 
 ## License
-GottBERT is AGPL-v3 licensed.
+The GottBERT model is MIT licensed.
 
 ## Citation
 Please cite as:
