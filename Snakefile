@@ -29,7 +29,7 @@ rule prepare_dataset:
   input: 'scripts/prepare_datasets/target/release/prepare_datasets'
   output: expand(output('raw/{sample}.raw'), sample=['train', 'test', 'valid'])
   params:
-    num_lines=config['nun_docs_valid_test_set'],
+    num_lines=config['num_docs_valid_test_set'],
     output_raw=output('raw'),
     in_file=config['in_file']
   shell:
