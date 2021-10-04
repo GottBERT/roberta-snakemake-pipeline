@@ -13,7 +13,7 @@ According to our experience a test and valid set file of about 3-5 MB should be 
 In `files/example/de_dedup.txt` lies a file which is a small extract of the German OSCAR corpus. We can use it for a small test computation. In order to run the entire pipeline and CLI parameters (overwriting the values in `config.yaml`) just run the following lines:
 
 ```bash
-snakemake --use-conda --config in_file=files/example/de_dedup.txt num_docs_valid_test_set=100 size_bpe_train_file=700 vocab_size=64 -j8
+snakemake --use-conda -j$(nproc --all) --config in_file=files/example/de_dedup.txt num_docs_valid_test_set=100 size_bpe_train_file=700 vocab_size=64
 ```
 
 For furhter insrucitons about the config parameters, which we pass in the example per command line, read `config.yaml`. It's also possible to define all parameters there.
