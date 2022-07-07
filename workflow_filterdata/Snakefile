@@ -1,6 +1,6 @@
 configfile: "config.yaml"
 
-from iso639 import languages
+# from iso639 import languages
 import os
 
 def output(file, output_dir = config['dir_output']):
