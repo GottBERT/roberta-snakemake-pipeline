@@ -36,7 +36,10 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
     filtered_sentence = [w for w in word_tokens if not w in stop_words]
     
     # compute stopword ratio, i.e. 1-|tokens without stop words|/|tokens of document|
-    stopword_ratio = 1-len(filtered_sentence)/len(word_tokens)
+    if len(word_tokens) > 0:
+        stopword_ratio = 1-len(filtered_sentence)/len(word_tokens)
+    else:
+        stopword_ratio = 0
     
     # number of unique tokens
     num_unique_tokens_filtered = len(set(filtered_sentence))
@@ -58,10 +61,16 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
     num_punctuation = len(punctuation)
     
     # compute puntuation ratio, i.e. |puncuation tokens|/|tokens of document|
-    punctuation_ratio = num_punctuation/num_tokens_original
+    if num_tokens_original > 0:
+        punctuation_ratio = num_punctuation/num_tokens_original
+    else:
+        punctuation_ratio = 0
   
     # compute token ratio, which describes the occurence of repeating words
-    token_ratio = num_unique_tokens_filtered/num_tokens_original
+    if num_tokens_original > 0:
+        token_ratio = num_unique_tokens_filtered/num_tokens_original
+    else:
+        token_ratio = 0
 
     # number of tokens which start with a upper case character
     num_upper = len(upper)
@@ -73,7 +82,10 @@ with open(in_file, mode="r", encoding="utf-8") as f_in:
       upper_ratio = 0
   
     # ratio between upper word tokens and tokens in general, i.e. |upper case tokens|/|tokens of document|
-    upper_ratio = num_upper/num_tokens_original
+    if num_tokens_original > 0:
+        upper_ratio = num_upper/num_tokens_original
+    else:
+        num_tokens_original = 0
   
     if num_tokens_original > 0:
       df_result = df_result.append({
