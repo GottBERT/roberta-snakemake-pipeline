@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 from cleantext import clean
 
@@ -9,6 +9,7 @@ with open(INFILE, "r") as r, open(OUTFILE, "w") as w:
     for line in r:
         text = clean(line,
                      lower=False,
+                     fix_unicode=True,
                      no_urls=True,
                      no_emails=True,
                      no_phone_numbers=True,
