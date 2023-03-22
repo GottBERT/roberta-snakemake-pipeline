@@ -10,7 +10,7 @@ import argparse
 nltk.download("stopwords")
 
 parser = argparse.ArgumentParser(prog='compute_ratios')
-parser.add_argument('--in', dest="in_file", help='input text file', required=False, default='files/example/de_dedup.txt')
+parser.add_argument('--in', dest="in_file", help='input text file', required=True)
 parser.add_argument('--out', dest="out_file", help='output pickle file',required=False, default='ratios.pkl')
 parser.add_argument('--language', required=False, default='German')
 args = parser.parse_args()
