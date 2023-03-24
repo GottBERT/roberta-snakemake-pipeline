@@ -27,13 +27,16 @@ df_result = pd.DataFrame(columns=["filtered_tokens",
                                   "#token_upper",
                                   "upper_ratio",
                                   "upper_to_punct_ratio"])
+
+language = args.language.lower()
+
 word_tokenizer = nltk.RegexpTokenizer(r"\w+")
-stop_words = set(nltk.corpus.stopwords.words(args.language.lower()))
+stop_words = set(nltk.corpus.stopwords.words(language))
 
 with open(args.in_file, mode="r", encoding="utf-8") as f_in:
   for document in f_in:
   
-    word_tokens = nltk.tokenize.word_tokenize(document)
+    word_tokens = nltk.tokenize.word_tokenize(document, language=language)
     
     # tokens without stopwords
     filtered_sentence = [w for w in word_tokens if not w in stop_words]
@@ -51,7 +54,7 @@ with open(args.in_file, mode="r", encoding="utf-8") as f_in:
     num_tokens_original = len(word_tokens)
     
     # apply word tokenizer to get words
-    words = word_tokenizer.tokenize(document)
+    words = word_tokenizer.tokenize(document, language=language)
     
     # compute puntuation, i.e. difference of word tokens and original tokens
     punctuation = [w for w in word_tokens if not w in words]
