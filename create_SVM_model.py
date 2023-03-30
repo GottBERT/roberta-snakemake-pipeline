@@ -3,6 +3,7 @@
 from sklearn import svm, model_selection
 import pandas as pd
 import numpy as np
+
 # https://scikit-learn.org/stable/model_persistence.html
 # Joblib offers alternative pickle load and dump functions
 # which is more efficient for sklearn models
@@ -21,8 +22,8 @@ from sklearn.metrics import (
 )
 
 parser = argparse.ArgumentParser(prog='compute_ratios')
-parser.add_argument('--train', dest="in_train", help='input train pickle file', required=True)
-parser.add_argument('--test', dest="in_test", help='input test pickle file', required=True)
+parser.add_argument('--train', dest="in_train", help='input train parquet file', required=True)
+parser.add_argument('--test', dest="in_test", help='input test parquet file', required=True)
 parser.add_argument('--gt', dest="in_groundtruth", help='path to ground truth json (label studio minimal format)', required=True)
 parser.add_argument('--out', dest="out_model", help='output joblib file',required=False, default='oneclasssvm.joblib')
 
@@ -36,8 +37,8 @@ pd_label_studio = pd.read_json('label_studio-min.json')
 
 # Select a subset of ratios as model features
 cols = ["stopword_ratio", "punctuation_ratio", "token_ratio", "upper_ratio", "upper_to_punct_ratio"]
-df_train = pd.read_pickle(args.in_train)[cols].astype(float)
-df_test = pd.read_pickle(args.in_test)[cols].astype(float)
+df_train = pd.read_parquet(args.in_train)[cols].astype(float)
+df_test = pd.read_parquet(args.in_test)[cols].astype(float)
 
 # 
 X_test = df_test.to_numpy()
@@ -59,7 +60,7 @@ for nu in list(map(lambda e: float(e), args.nu.split(","))):
     labels = pd.DataFrame(list(zip(idx_test, y_pred_test)), columns=["index", "class"])
     labels.set_index('index', inplace=True)
 
-    d = pd.read_pickle("ratios.pkl")["original_text"].iloc[idx_test]
+    d = pd.read_parquet(args.in_train)["original_text"].iloc[idx_test]
     pred = pd.concat([d, labels], axis=1)
 
     # model evaluation
