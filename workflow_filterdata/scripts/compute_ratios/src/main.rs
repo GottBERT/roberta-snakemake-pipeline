@@ -18,6 +18,7 @@ fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
         .collect()
 }
 
+
 fn main() {
     let filename_in = "/home/scheible/git/lrz/NLP/BERT/GottBERT/files/SVM/train_big_n.raw";
 
@@ -31,6 +32,7 @@ fn main() {
     let mut vec_num_unique_tokens_filtered : Vec<u64> = Vec::new();
     let mut vec_num_punctuation : Vec<u64> = Vec::new();
     let mut vec_num_upper : Vec<u64> = Vec::new();
+    let mut cb_document = Utf8ChunkedBuilder::new(&String::from("original_text"), 8, 8);
 
 
     // read stopwords
@@ -139,6 +141,7 @@ fn main() {
                 vec_num_unique_tokens_filtered.push(num_unique_tokens_filtered);
                 vec_num_punctuation.push(num_punctuation);
                 vec_num_upper.push(num_upper);
+                cb_document.append_value(document);
 
                 // println!("stopword_ratio: {:?}", stopword_ratio);
                 // println!("punctuation_ratio: {:?}", punctuation_ratio);
@@ -162,10 +165,14 @@ fn main() {
     let s6 = ChunkedArray::<UInt64Type>::from_vec("num_unique_tokens_filtered", vec_num_unique_tokens_filtered).into_series();
     let s7 = ChunkedArray::<UInt64Type>::from_vec("num_punctuation", vec_num_punctuation).into_series();
     let s8 = ChunkedArray::<UInt64Type>::from_vec("num_upper", vec_num_upper).into_series();
+    let s9 = cb_document.finish().into_series();
     
-    let mut df_result = DataFrame::new(vec![s0, s1, s2, s3, s4, s5, s6, s7, s8]).unwrap();
-    let mut file = std::fs::File::create("result.csv").unwrap();
-    CsvWriter::new(&mut file).finish(&mut df_result).unwrap();
+    let mut df_result = DataFrame::new(vec![s0, s1, s2, s3, s4, s5, s6, s7, s8, s9]).unwrap();
+    // let mut file = std::fs::File::create("result.csv").unwrap();
+    // CsvWriter::new(&mut file).finish(&mut df_result).unwrap();
+
+    let mut file = std::fs::File::create("path.parquet").unwrap();
+    ParquetWriter::new(&mut file).finish(&mut df_result).unwrap();
 
     // TODO: find a way to save to an exchange format to python and find a format in RUST expressing tabular data structures (Vec<Objects>?)
 

@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 natural = "0.3.0"
 itertools = "0.10.5"
-polars = "0.28.0"
+polars = { version = "0.28.0", features = ["polars-io"] }
+polars-io = { version = "0.28.0", features = ["parquet"] }
 polars-arrow = "0.28.0"
 pyo3 = { version = "0.18.2", features = ["extension-module"] }
