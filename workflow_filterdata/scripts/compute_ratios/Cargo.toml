@@ -11,4 +11,4 @@ itertools = "0.10.5"
 polars = { version = "0.28.0", features = ["polars-io"] }
 polars-io = { version = "0.28.0", features = ["parquet"] }
 polars-arrow = "0.28.0"
-pyo3 = { version = "0.18.2", features = ["extension-module"] }
+clap = "2.33.3"

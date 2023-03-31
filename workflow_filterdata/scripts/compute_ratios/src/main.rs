@@ -1,8 +1,9 @@
 extern crate natural;
+extern crate clap;
 
 use polars::prelude::*;
 use natural::tokenize::tokenize;
-
+use clap::{App, Arg};
 
 use std::{
     fs::File,
@@ -20,7 +21,41 @@ fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
 
 
 fn main() {
-    let filename_in = "/home/scheible/git/lrz/NLP/BERT/GottBERT/files/SVM/train_big_n.raw";
+    let matches = App::new("langdetect")
+        .version("0.1.0")
+        .author("Raphael Johannes Scheible <raphael.scheible@tum.de>")
+        .about(
+            "computes ratios for each document (line) of the input file for subsequent one class SVM",
+        )
+        .arg(
+            Arg::with_name("filename_in")
+                .short("i")
+                .long("in")
+                .required(true)
+                .takes_value(true)
+                .help("input file"),
+        )
+        .arg(
+            Arg::with_name("filename_out")
+                .short("o")
+                .long("out")
+                .takes_value(true)
+                .required(true)
+                .help("output file (parquet)"),
+        )
+        .arg(
+            Arg::with_name("filename_stopwords")
+                .short("s")
+                .long("stop")
+                .takes_value(true)
+                .required(true)
+                .help("file with one stop word in each line"),
+        )
+        .get_matches();
+
+    let filename_in = matches.value_of("filename_in").unwrap();
+    let filename_out = matches.value_of("filename_out").unwrap();
+    let filename_stopwords = matches.value_of("filename_stopwords").unwrap();
 
     // initialize vectors based on which the dataframe will finally be created
     let mut vec_stopword_ratio : Vec<f64> = Vec::new();
@@ -36,7 +71,7 @@ fn main() {
 
 
     // read stopwords
-    let stop_words = lines_from_file("/home/scheible/git/lrz/NLP/BERT/GottBERT/workflow_filterdata/scripts/compute_ratios/src/stopwords/german");
+    let stop_words = lines_from_file(filename_stopwords);
 
     // File hosts must exist in current path before this produces output
     if let Ok(lines) = read_lines(filename_in) {
@@ -142,16 +177,6 @@ fn main() {
                 vec_num_punctuation.push(num_punctuation);
                 vec_num_upper.push(num_upper);
                 cb_document.append_value(document);
-
-                // println!("stopword_ratio: {:?}", stopword_ratio);
-                // println!("punctuation_ratio: {:?}", punctuation_ratio);
-                // println!("#tokens_original: {:?}", num_tokens_original);
-                // println!("#tokens_filtered: {:?}", num_unique_tokens_filtered);
-                // println!("#tokens_puctuation: {:?}", num_punctuation);
-                // println!("token_ratio: {:?}", token_ratio);
-                // println!("#token_upper: {:?}", num_upper);
-                // println!("upper_ratio: {:?}", upper_ratio);
-                // println!("upper_to_punct_ratio: {:?}", upper_to_punct_ratio);
             }
         }
     }
@@ -171,11 +196,9 @@ fn main() {
     // let mut file = std::fs::File::create("result.csv").unwrap();
     // CsvWriter::new(&mut file).finish(&mut df_result).unwrap();
 
-    let mut file = std::fs::File::create("path.parquet").unwrap();
+    // save as parquet file in order to use it in other scripts
+    let mut file = std::fs::File::create(filename_out).unwrap();
     ParquetWriter::new(&mut file).finish(&mut df_result).unwrap();
-
-    // TODO: find a way to save to an exchange format to python and find a format in RUST expressing tabular data structures (Vec<Objects>?)
-
 }
 
 // The output is wrapped in a Result to allow matching on errors
