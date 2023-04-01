@@ -14,12 +14,16 @@ rule all:
 
 rule compile_rust:
   output: 
-    langdetect="scripts/langdetect/target/release/langdetect"
+    langdetect="scripts/langdetect/target/release/langdetect",
+    compute_ratios="scripts/compute_ratios/target/release/compute_ratios"
   conda: "envs/rust.yaml"
   shell: r"""
     # using the conda installed linker
     CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-conda_cos6-linux-gnu-cc \
       cargo build --release --manifest-path scripts/langdetect/Cargo.toml
+    
+    CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-conda_cos6-linux-gnu-cc \
+      cargo build --release --manifest-path scripts/compute_ratios/Cargo.toml
   """
 
 rule split_file:
