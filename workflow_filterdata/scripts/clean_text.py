@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
+# https://pypi.org/project/clean-text/
 from cleantext import clean
 import argparse
 
+parser = argparse.ArgumentParser(
+                    prog='clean_text',
+                    description='cleans a text file')
+parser.add_argument('-i', '--in_file')
+parser.add_argument('-o', '--out_file')
+args = parser.parse_args()
 
-
-INFILE = "files/example/de_dedup.txt"
-OUTFILE = "de_dedup_cleaned.txt"
-
-with open(INFILE, "r") as r, open(OUTFILE, "w") as w:
+with open(args.in_file, "r") as r, open(args.out_file, "w") as w:
     for line in r:
         text = clean(line,
                      lower=False,
