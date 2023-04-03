@@ -26,6 +26,9 @@ parser.add_argument('--train', dest="in_train", help='input train parquet file',
 parser.add_argument('--test', dest="in_test", help='input test parquet file', required=True)
 parser.add_argument('--gt', dest="in_groundtruth", help='path to ground truth json (label studio minimal format)', required=True)
 parser.add_argument('--out', dest="out_model", help='output joblib file',required=False, default='oneclasssvm.joblib')
+parser.add_argument('--metrics', dest="out_metrics", help='output metrics file',required=False, default='metrics.json')
+parser.add_argument('--log', dest="out_log", help='output training log file',required=False, default='training_log.csv')
+
 
 # list for nu can be created by e.g. print(','.join(str(x.round(3)) for x in np.arange(0.01,0.1, 0.005)))
 parser.add_argument('--nu',  dest='nu', required=True, help='multiple values possible als comma separated list')
@@ -109,6 +112,6 @@ metrics = o_best_model
 
 # save data
 dump(best_model, args.out_model)
-metrics.to_json('metrics.json', orient='index', indent=2)
+metrics.to_json(args.out_metrics, orient='index', indent=2)
 
-df_eval[metrics.keys()].to_csv('training_log.csv', index=False)
+df_eval[metrics.keys()].to_csv(args.out_log, index=False)
