@@ -36,7 +36,7 @@ parser.add_argument('--language', required=False, default='German')
 args = parser.parse_args()
 
 # load labelled data
-pd_label_studio = pd.read_json('label_studio-min.json')
+pd_label_studio = pd.read_json(args.in_groundtruth)
 
 # Select a subset of ratios as model features
 cols = ["stopword_ratio", "punctuation_ratio", "token_ratio", "upper_ratio", "upper_to_punct_ratio"]
@@ -63,13 +63,16 @@ for nu in list(map(lambda e: float(e), args.nu.split(","))):
     labels = pd.DataFrame(list(zip(idx_test, y_pred_test)), columns=["index", "class"])
     labels.set_index('index', inplace=True)
 
-    d = pd.read_parquet(args.in_train)["original_text"].iloc[idx_test]
+    d = pd.read_parquet(args.in_test)["original_text"].iloc[idx_test]
     pred = pd.concat([d, labels], axis=1)
 
     # model evaluation
     # merge with groundtruth data
     df_merge = pd.merge(pd_label_studio.reset_index()[['index','sentiment']], pred.reset_index(), on='index')
     df_merge['sentiment'] = df_merge['sentiment'].replace('mixed', -1).replace('spam', -1).replace('clean', 1)
+
+    # in case some NaN values are in the annotation, find out which by uncommenting this line
+    # print(df_merge[df_merge.isna().any(axis=1)])
 
     y_test = df_merge['sentiment']
     y_test_predictions = df_merge['class']

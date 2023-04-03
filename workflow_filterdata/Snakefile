@@ -26,6 +26,52 @@ rule compile_rust:
       cargo build --release --manifest-path scripts/compute_ratios/Cargo.toml
   """
 
+rule compute_ratio_test:
+  output: 
+    result=output(config["ratio_file_test"])
+  input:
+    compute_ratios_bin="scripts/compute_ratios/target/release/compute_ratios",
+    txt=config["svm_txt_test"],
+    stopwords=config["ratio_stop_words"]
+  shell: r"""
+    {input.compute_ratios_bin} --stop {input.stopwords} \
+      --in {input.txt} --out {output.result}
+  """
+
+rule compute_ratio_train:
+  output: 
+    result=output(config["ratio_file_train"])
+  input:
+    compute_ratios_bin="scripts/compute_ratios/target/release/compute_ratios",
+    txt=config["svm_txt_train"],
+    stopwords=config["ratio_stop_words"]
+  shell: r"""
+    {input.compute_ratios_bin} --stop {input.stopwords} \
+      --in {input.txt} --out {output.result}
+  """
+  
+
+rule train_svm:
+  input:
+    test=output(config["ratio_file_test"]),
+    train=output(config["ratio_file_train"]),
+    gt=config["svm_file_gt"]
+  output:
+    model=output(config['svm_file_model']),
+    metrics=output(config['svm_file_metrics']),
+    log=output(config['svm_file_train_log'])
+  conda: "envs/svm.yaml"
+  shell: r"""
+    scripts/create_SVM_model.py \
+      --gt {input.gt} \
+      --test {input.test} \
+      --train {input.train} \
+      --out {output.model} \
+      --metrics {output.metrics} \
+      --log {output.log} \
+      --nu {config[svm_nu]}
+  """
+
 rule split_file:
   input: config['in_file']
   output: expand(output("tmp/split_{part}.txt"), part=range(1,config['num_files']+1))

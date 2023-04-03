@@ -8532,6 +8532,7 @@
   {
     "text": "aber ich finde es doch ok, man sollte eben nur dazu stehen und auch sagen \"ja, natürlich habe ich mir den Bauch straffen lassen, warum auch nicht?\" dann wäre doch alles im Butter.. Diese blöde Heuchlerei nervt nur total:(... Da wird man doch verrückt und denkt sich \"wieso sehe ich nach einem Kind schlechter aus??\"",
     "id": 612,
+    "sentiment": "clean",
     "annotator": 1,
     "annotation_id": 610,
     "created_at": "2023-03-20T22:41:26.636585Z",
@@ -14271,6 +14272,7 @@
   {
     "text": "Gegenüber unseren Kunden und Geschäftspartnern verhalten wir uns transparent, fair und loyal. Wir gehen von der Basis des gegenseitigen Vertrauens und Verständnisses aus. Unlauteren Wettbewerb lehnen wir ab. Kundenbeziehungen und Arbeitsausführungen gestalten wir so, dass wir als verlässlicher und seriöser Partner wahrgenommen werden.",
     "id": 1186,
+    "sentiment": "clean",
     "annotator": 1,
     "annotation_id": 1183,
     "created_at": "2023-03-21T23:00:58.588728Z",
