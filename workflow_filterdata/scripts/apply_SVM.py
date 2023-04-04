@@ -3,6 +3,7 @@
 import pandas as pd
 import joblib
 
+# TODO: replace pandas by polars and make it a CLI with params
 
 model_path = 'oneclasssvm.joblib'
 ratio_path = 'ratios.pkl'
