@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+dependencies:
+  - pip:
+    - pandas==1.5.3
+    - scikit-learn==1.2.1
+    - fastparquet==2023.2.0
