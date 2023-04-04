@@ -5,3 +5,5 @@ dependencies:
     - pandas==1.5.3
     - scikit-learn==1.2.1
     - fastparquet==2023.2.0
+    - joblib==1.2.0
+    - polars==0.16.18

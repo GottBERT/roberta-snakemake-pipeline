@@ -1,0 +1,6 @@
+channels:
+  - conda-forge
+dependencies:
+  - pip:
+    - clean-text==0.6.0
+    - polars==0.16.18
