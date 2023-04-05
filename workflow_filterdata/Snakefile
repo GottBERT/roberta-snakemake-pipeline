@@ -11,7 +11,7 @@ rule all:
     clean=output("filtered.txt"),
     fail=output("trash/langdetect.txt"),
     doc_count=output("count.txt"),
-    dirt_svm=output("trash/dirt.txt"),
+    dirt_svm=output("trash/svm.txt"),
     dirt_filter=output("trash/filter.txt")
 
 rule compile_rust:
@@ -130,7 +130,7 @@ rule clean_content:
 rule filter_language:
   input: 
     bin="scripts/langdetect/target/release/langdetect",
-    data=temp(output("tmp/clean_{part}.txt"))
+    data=output("tmp/clean_{part}.txt")
   output: 
     success=temp(output("tmp/langdetect_{part}.success.txt")),
     fail=temp(output("tmp/langdetect_{part}.fail.txt")),
@@ -172,7 +172,7 @@ rule merge_files:
     clean=output("filtered.txt"),
     fail=output("trash/langdetect.txt"),
     doc_count=output("count.txt"),
-    dirt_svm=output("trash/dirt.txt"),
+    dirt_svm=output("trash/svm.txt"),
     dirt_filter=output("trash/filter.txt")
   shell: r"""
     cat {input.clean} > {output.clean}
