@@ -8,9 +8,11 @@ def output(file, output_dir = config['dir_output']):
 
 rule all:
   input: 
-    result=output('filtered.txt'),
-    fail=output('fail.txt'),
-    doc_count=output('count.txt')
+    clean=output("filtered.txt"),
+    fail=output("trash/langdetect.txt"),
+    doc_count=output("count.txt"),
+    dirt_svm=output("trash/dirt.txt"),
+    dirt_filter=output("trash/filter.txt")
 
 rule compile_rust:
   output: 
@@ -32,7 +34,7 @@ rule compute_ratio_test:
   input:
     compute_ratios_bin="scripts/compute_ratios/target/release/compute_ratios",
     txt=config["svm_txt_test"],
-    stopwords=config["ratio_stop_words"]
+    stopwords=config["ratio_file_stop_words"]
   shell: r"""
     {input.compute_ratios_bin} --stop {input.stopwords} \
       --in {input.txt} --out {output.result}
@@ -44,7 +46,7 @@ rule compute_ratio_train:
   input:
     compute_ratios_bin="scripts/compute_ratios/target/release/compute_ratios",
     txt=config["svm_txt_train"],
-    stopwords=config["ratio_stop_words"]
+    stopwords=config["ratio_file_stop_words"]
   shell: r"""
     {input.compute_ratios_bin} --stop {input.stopwords} \
       --in {input.txt} --out {output.result}
@@ -105,49 +107,77 @@ rule split_file:
     done
   """
 
-rule clean_content:
+rule filter_damaged_umlauts:
   input: output("tmp/split_{part}.txt")
-  output: temp(output("tmp/clean_{part}.txt"))
+  output: 
+    filtered=temp(output("tmp/filtered_{part}.txt")),
+    dirt=temp(output("tmp/filtered_{part}.dirt.txt"))
   shell: r"""
-    scripts/clean_it.sh {input} \
-      | scripts/mosesdecoder/scripts/tokenizer/replace-unicode-punctuation.perl \
-      | scripts/mosesdecoder/scripts/tokenizer/remove-non-printing-char.perl > {output}
+    cat {input} | awk 'length($0) < {config[min_tokens]}' > {output.dirt} || true
+    cat {output.dirt} | grep -va '�' > {output.dirt} || true
+    cat {input} | grep -a '�' >> {output.dirt} || true
+    cat {input} | awk 'length($0) >= {config[min_tokens]}' | grep -va '�' > {output.filtered} || true
   """
 
-rule filter_documents:
+rule clean_content:
+  input: output("tmp/filtered_{part}.txt")
+  output: output("tmp/clean_{part}.txt")
+  conda: "envs/clean.yaml"
+  shell: r"""
+    scripts/clean_text.py -i {input} -o {output}
+  """
+
+rule filter_language:
   input: 
     bin="scripts/langdetect/target/release/langdetect",
-    data=output("tmp/clean_{part}.txt")
+    data=temp(output("tmp/clean_{part}.txt"))
   output: 
-    success=temp(output("tmp/clean_{part}.success")),
-    fail=temp(output("tmp/clean_{part}.fail")),
-    doc_count=temp(output("tmp/clean_{part}.count"))
+    success=temp(output("tmp/langdetect_{part}.success.txt")),
+    fail=temp(output("tmp/langdetect_{part}.fail.txt")),
+    doc_count=temp(output("tmp/langdetect_{part}.count.txt"))
   shell: "{input.bin} -i {input.data} -s {output.success} \
     -f {output.fail} -c {output.doc_count} -l {config[language]} -t {config[whatlang_threashold]}"
 
-
-rule filter_content:
-  input: output("tmp/clean_{part}.success")
-  output: temp(output("tmp/clean_{part}.final"))
-  conda: "envs/filter.yaml"
+rule generate_ratios:
+  input: 
+    data=output("tmp/langdetect_{part}.success.txt"),
+    bin="scripts/compute_ratios/target/release/compute_ratios",
+    stopwords=config["ratio_file_stop_words"]
+  output: temp(output("tmp/ratios_{part}.parquet"))
   shell: r"""
-    scripts/token_based_filter.py {input} {output} \
-      {config[language]} {config[threshold_token]} \
-      {config[threshold_stopword]} {config[min_tokens]}
+    {input.bin} --in {input.data} --out {output} --stop {input.stopwords}
   """
 
+rule apply_svm:
+  input: 
+    data=output("tmp/ratios_{part}.parquet"),
+    model=output(config['svm_file_model']),
+  output: 
+    clean=temp(output("tmp/svm_{part}.clean.txt")),
+    dirt=temp(output("tmp/svm_{part}.dirt.txt"))
+  conda: "envs/svm.yaml"
+  shell: r"""
+    scripts/apply_SVM.py --model {input.model} --ratio {input.data} \
+      --out {output.clean} --dirt {output.dirt}
+  """
 
 rule merge_files:
   input: 
-    final=expand(output("tmp/clean_{part}.final"), part=range(1,config['num_files']+1)),
-    doc_count=expand(output("tmp/clean_{part}.count"), part=range(1,config['num_files']+1)),
-    fail=expand(output("tmp/clean_{part}.fail"), part=range(1,config['num_files']+1))
+    clean=expand(output("tmp/svm_{part}.clean.txt"), part=range(1,config['num_files']+1)),
+    doc_count=expand(output("tmp/langdetect_{part}.count.txt"), part=range(1,config['num_files']+1)),
+    fail=expand(output("tmp/langdetect_{part}.fail.txt"), part=range(1,config['num_files']+1)),
+    dirt_svm=expand(output("tmp/svm_{part}.dirt.txt"), part=range(1,config['num_files']+1)),
+    dirt_filter=expand(output("tmp/filtered_{part}.dirt.txt"), part=range(1,config['num_files']+1))
   output: 
-    final=output("filtered.txt"),
-    fail=output("fail.txt"),
-    doc_count=output("count.txt")
+    clean=output("filtered.txt"),
+    fail=output("trash/langdetect.txt"),
+    doc_count=output("count.txt"),
+    dirt_svm=output("trash/dirt.txt"),
+    dirt_filter=output("trash/filter.txt")
   shell: r"""
-    cat {input.final} > {output.final}
+    cat {input.clean} > {output.clean}
     awk '{{print $0}}' {input.doc_count} > {output.doc_count}
     cat {input.fail} > {output.fail}
+    cat {input.dirt_filter} > {output.dirt_filter}
+    cat {input.dirt_svm} > {output.dirt_svm}
   """

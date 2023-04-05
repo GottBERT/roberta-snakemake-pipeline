@@ -6,7 +6,7 @@ in_file: ../files/example/de_dedup.txt
 #  - German
 language: German
 
-ratio_stop_words: scripts/compute_ratios/src/stopwords/german
+ratio_file_stop_words: scripts/compute_ratios/src/stopwords/german
 ratio_file_test: ratios_test.parquet
 ratio_file_train: ratios_train.parquet
 
@@ -34,7 +34,7 @@ svm_file_metrics: metrics.json
 # files used for training/testing the 1class SVM
 # based on these files ratios are computed for each document
 # which are used for classification
-svm_txt_train: ../files/SVM/train_big_n.raw
+svm_txt_train: ../files/SVM/train.raw
 svm_txt_test: ../files/SVM/label_studio.raw
 
 # nu parameter for single class SVM as comma separated string using multipe values
@@ -54,17 +54,4 @@ whatlang_threashold: 1.0
 # minimal tokens a document should have; documents with less tokens are filtered out.
 min_tokens: 40
 
-# in order to filter meaningless spam, we compute a stopword ratio
-#  len(token(document_without_stopwords))/len(token(document))
-# the higher the ratio, less stopwords, which is often the case in spam lists.
-# We filter out all documents with a ratio >= threshold.
-threshold_stopword: 0.9
-
-# A token ratio is computed by 
-#  len(set(token(document_without_stopwords)))/len(token(document))
-# which reflects the repetition of words. 
-# The higher the score, the more words besides stopwords, are used,
-# which usually reflects a higher variance of the document.
-# We filter out all documents with a ratio <= threshold.
-threshold_token: 0.4
 
