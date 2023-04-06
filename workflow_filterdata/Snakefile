@@ -64,14 +64,17 @@ rule train_svm:
     log=output(config['svm_file_train_log'])
   conda: "envs/svm.yaml"
   shell: r"""
-    scripts/create_SVM_model.py \
+    scripts/train_SVM.py \
       --gt {input.gt} \
       --test {input.test} \
       --train {input.train} \
       --out {output.model} \
       --metrics {output.metrics} \
       --log {output.log} \
-      --nu {config[svm_nu]}
+      --nu {config[svm_nu]} \
+      --tol {config[svm_tol]} \
+      --gamma {config[svm_gamma]} \
+      --cache_size {config[svm_cache_size]}
   """
 
 rule split_file:
