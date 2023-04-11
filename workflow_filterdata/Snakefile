@@ -95,18 +95,18 @@ rule split_file:
 
     # do the split
     split \
-      --numeric-suffixes=1\
+      -d \
       --additional-suffix=".txt" \
       --lines=$lines_per_file "{config[in_file]}" "{params.output}"
 
     # rename files, i.e. form split_0001000.txt to split_1000.txt
-    for file in {params.output}*
+    i={config[num_files]}
+    for file in $(ls {params.output}* | tac)
     do
-      new_name=$(echo $file | sed -E 's/(.+_)0*([1-9].*)/\1\2/')
-      
-      if [[ ! -f $new_name ]]; then
-        mv $file $new_name
-      fi
+      # new_name=$(echo $file | sed -E 's/(.+_)0*([1-9].*)/\1\2/')
+      new_name={params.output}$i.txt
+      mv $file $new_name
+      i=$((i-1))
     done
   """
 
