@@ -98,8 +98,18 @@ rule binarize_dict:
   params:
     flag=output('flag/fix_dict.flag'),
     dir_bpe=output('bpe'),
-    dir_bin=output('bin')
-  shell: "scripts/preprocess.sh {params.dir_bpe} {params.dir_bin}"
+    dir_bin=output('bin'),
+    dir_bpe_enc=output('bpe_enc')
+  shell: """
+    fairseq-preprocess \
+      --only-source \
+      --srcdict {input.dict_file} \
+      --trainpref {params.dir_bpe}/train.bpe \
+      --validpref {params.dir_bpe}/valid.bpe \
+      --testpref {params.dir_bpe}/test.bpe \
+      --destdir {params.dir_bin} \
+      --workers 60
+  """
 
 
 # when binarizing without a pre-existing dict.txt, a new one will be created
@@ -116,7 +126,15 @@ rule binarize:
   params:
     dir_bpe=output('bpe'),
     dir_bin=output('bin')
-  shell: "scripts/preprocess.sh {params.dir_bpe} {params.dir_bin}"
+  shell: """
+    fairseq-preprocess \
+      --only-source \
+      --trainpref {params.dir_bpe}/train.bpe \
+      --validpref {params.dir_bpe}/valid.bpe \
+      --testpref {params.dir_bpe}/test.bpe \
+      --destdir {params.dir_bin} \
+      --workers 60
+    """
 
 # if dict.txt exists never run this stream
 def block_if_dict(wildcards):
