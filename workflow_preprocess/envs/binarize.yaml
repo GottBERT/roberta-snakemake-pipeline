@@ -1,5 +1,6 @@
 channels:
   - conda-forge
 dependencies:
+  - python=3.10
   - pip:
-    - fairseq==0.10.0
+    - fairseq==0.12.2
