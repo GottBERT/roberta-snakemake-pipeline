@@ -17498,5 +17498,505 @@
     "created_at": "2023-04-06T12:16:22.203743Z",
     "updated_at": "2023-04-06T12:16:22.203761Z",
     "lead_time": 15.967
+  },
+  {
+    "text": "Info: Antananarivo (alte französische Bezeichnung: Tananarive), wörtlich übersetzt “die Stadt der Tausendâ€, ist seit Beginn des 19. Jahrhunderts, als Antananarivo noch eine Ansiedlung am Fuße des Hügels von Analamanga mit dem heutigen Rova-Palast war, die Hauptstadt Madagaskars. Heute ist sie die einzige Millionenstadt (fast 2 Millionen Einwohner im Einzugsgebiet) und wirtschaftliches, sowie politisches Zentrum Madagaskars. Die Stadt liegt im zentralen Hochland Madagaskars und erstreckt sich mit ihrem Stadtkern über sieben Hügel mit einer Höhe zwischen 1250 m und 1450 m, die die Unterstadt und die flachere Umgebung um bis zu 200 m überragen. Das Umland ist das bergige Kerngebiet des Merina-Volkes und beherbergt viele alte Siedlungsorte und Königssitze. Vier große Flüsse durchqueren das Gebiet um Antananarivo von Osten nach Nordwesten, der Mamba etwa 7 km nördlich von Antananariva, der große Fluss Ikopa 5 km südlich und der Sisaony und Andromba südwestlich.",
+    "id": 12328,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1761,
+    "created_at": "2023-04-25T08:48:44.729446Z",
+    "updated_at": "2023-04-25T08:48:44.729465Z",
+    "lead_time": 9.147
+  },
+  {
+    "text": "[21]\tSteinle, Hahn (1995): Bauen mit Betonfertigteilen im Hochbau. Berlin: Fachvereinigung Deutscher Betonfertigteilbau e. V., Ernst & Sohn GmbH",
+    "id": 12329,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1762,
+    "created_at": "2023-04-25T08:48:57.683862Z",
+    "updated_at": "2023-04-25T08:48:57.683883Z",
+    "lead_time": 12.612
+  },
+  {
+    "text": "Soll die übertragene Energie einer elektromagnetischen Strahlung in der Einheit eV (elektronenvolt) ausgedrückt werden, so lässt sich dieser Wert durch die Beziehung E= h  f berechnen. In dieser Formel steht h für das Plancksche Wirkungsquantum (h= 4,13566733 10-15 eVs) also ..",
+    "id": 12330,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1763,
+    "created_at": "2023-04-25T08:49:01.912034Z",
+    "updated_at": "2023-04-25T08:49:01.912055Z",
+    "lead_time": 4.031
+  },
+  {
+    "text": "﻿Ich habe nicht die Logik hinter dies zu realisieren und gebeten, sich direkt für den Arzt zu sprechen. Dieser Arzt hat mir gesagt, dass sie nach wie vor der Meinung, dass die Symptome meines Sohnes in der Regel nicht den Mahlzeiten All...\t",
+    "id": 12331,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1764,
+    "created_at": "2023-04-25T08:49:04.091390Z",
+    "updated_at": "2023-04-25T08:49:04.091411Z",
+    "lead_time": 1.999
+  },
+  {
+    "text": "Sie befinden sich hier: Startseite » PC, Mac, Notebook & Tablet » KVM Switche / Medienkonverter » Lindy\t",
+    "id": 12332,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1765,
+    "created_at": "2023-04-25T08:49:12.513586Z",
+    "updated_at": "2023-04-25T08:49:12.513606Z",
+    "lead_time": 8.193
+  },
+  {
+    "text": "Veröffentlicht in Deutsch, Hauptgericht, Kai Style, Rezepte, Suppe, Ungarische Küche\tVerschlagwortet mit Hauptgericht, Kai Style, Kartoffeln, Kessel, kochen, Kolbasz, Lagerfeuer, paprika, Rezept, Suppe, ungarisch, Würstchen, Wiener Würstchen\tEin Kommentar",
+    "id": 12333,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1766,
+    "created_at": "2023-04-25T08:49:20.649691Z",
+    "updated_at": "2023-04-25T08:49:20.649711Z",
+    "lead_time": 7.933
+  },
+  {
+    "text": "Dieser Beitrag wurde am 11. Mai 2014 von Markus Mansshardt in Allgemein veröffentlicht. Schlagworte: heartbleed, phishing.\t",
+    "id": 12334,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1767,
+    "created_at": "2023-04-25T08:49:26.509886Z",
+    "updated_at": "2023-04-25T08:49:26.509904Z",
+    "lead_time": 5.644
+  },
+  {
+    "text": "Tischlampe, Bodenleuchte Edge H. 75cm matt weiß Im Überblick: Lieferumfang: 1 StückMaße: Höhe 75cmMaterial: Keramik, Farbe: matt weißFür Leuchtmittel 1 x E27, max.Leistung 40 Watt (Liefer ...\t",
+    "id": 12335,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1768,
+    "created_at": "2023-04-25T08:49:34.255903Z",
+    "updated_at": "2023-04-25T08:49:45.035619Z",
+    "lead_time": 13.777999999999999
+  },
+  {
+    "text": "Vorheriger BeitragMit dieser TLC-Diät struktuierter abnehmen und schneller den Cholesterinspiegel absenkenNächster BeitragWeltnichtrauchertag: Jeder siebte Deutsche stirbt an den tödlichen Folgen des Rauchens\t",
+    "id": 12336,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1769,
+    "created_at": "2023-04-25T08:50:14.385112Z",
+    "updated_at": "2023-04-25T08:50:14.385134Z",
+    "lead_time": 18.859
+  },
+  {
+    "text": "Sie ist da!!! Eine unserer neuesten Errungenschaften: Eine Plasmaanlage von Messer mit 2 Brennern ...\t",
+    "id": 12337,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1770,
+    "created_at": "2023-04-25T08:50:20.700397Z",
+    "updated_at": "2023-04-25T08:50:20.700418Z",
+    "lead_time": 6.086
+  },
+  {
+    "text": "Veröffentlicht am 30. September 2008 von MEDIENMENSCH\tDieser Beitrag wurde in Das Neuste, Lebensstil veröffentlicht und mit Austin Healy, Classic Cars, Eifel, Eifelrennen, Eindrücke, Fakten, Formel eins, Gleichmäßigkeitsrennen, goldener Herbst, Grand Prix, Klassiker, Markenclubtreffen, Mercedes, Nürburgring, Nürburgrings, Oldtimer, Porsche, Rennen, TR-Register, Triumph verschlagwortet. Speichere den Permalink in Deinen Favoriten ab.\t",
+    "id": 12338,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1771,
+    "created_at": "2023-04-25T08:50:44.994777Z",
+    "updated_at": "2023-04-25T08:50:44.994795Z",
+    "lead_time": 24.115
+  },
+  {
+    "text": "Na, er hat doch gleich in seinem ersten Beitrag geschrieben, dass er den Rekord, den er in einer Scheune gefunden hat und dessen Motor er gerae repariert, verkaufen möchte.\t",
+    "id": 12339,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1772,
+    "created_at": "2023-04-25T08:50:50.309045Z",
+    "updated_at": "2023-04-25T08:50:50.309066Z",
+    "lead_time": 5.064
+  },
+  {
+    "text": "24.10.2018\t Sie sind wieder da: die Anzeigenmotive, auf denen Facebook-Nutzer sich nach einem privateren, stärker auf sie zugeschnittenen Netzwerk sehnen und sich über den Ist-Zustand beschweren. Wer nicht das komplette Motiv liest, könnte auf die Idee kommen, die soziale Plattform wolle sich selbst schlecht reden. Warum diese Marketing-Strategie? Wir haben nachgefragt.\t",
+    "id": 12340,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1773,
+    "created_at": "2023-04-25T08:51:00.645097Z",
+    "updated_at": "2023-04-25T08:51:00.645116Z",
+    "lead_time": 10.142
+  },
+  {
+    "text": "net.eth0 ist vorhanden /etc/conf.d/net ist auf dhcp eingestellt Hier mal der Inhalt der Datei: config_eth0=( \"dhcp\" ) dhcp_eth0=\"nodns nontp nonis\" Der Netzwerkanschluss heisst eth0, die WLAN-Karte ath0\t",
+    "id": 12341,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1774,
+    "created_at": "2023-04-25T08:51:05.529961Z",
+    "updated_at": "2023-04-25T08:51:05.529982Z",
+    "lead_time": 4.676
+  },
+  {
+    "text": "Die Dangler GmbH unterstützt Sie in allen Belangen rund um Ladenbau, Innenausbau und Marktservice. Von der Montage der Ladeneinrichtung bis zur Verräumung sind wir als vielseitiger Dienstleister stets für Sie da.\t",
+    "id": 12342,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1775,
+    "created_at": "2023-04-25T08:51:10.785899Z",
+    "updated_at": "2023-04-25T08:51:10.785919Z",
+    "lead_time": 5.068
+  },
+  {
+    "text": "Vorheriger Beitrag„Die Erschießung der Aufständischen“. Hommage à Francisco de Goya | KamenNächster BeitragNatron in Ketten – Anne Deifuss & Joey Schmidt-Muller\t",
+    "id": 12343,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1776,
+    "created_at": "2023-04-25T08:51:19.693481Z",
+    "updated_at": "2023-04-25T08:51:19.693503Z",
+    "lead_time": 8.676
+  },
+  {
+    "text": "bitte erlauben 1-3mm fehler wegen des manuellen maßes. pls sicherstellen, dass sie nichts dagegen haben, bevor sie bieten\t",
+    "id": 12344,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1777,
+    "created_at": "2023-04-25T08:51:28.394525Z",
+    "updated_at": "2023-04-25T08:51:28.394545Z",
+    "lead_time": 8.473
+  },
+  {
+    "text": "Macht es Sinn, Bryce Canyon in die Route einzubauen? Oder ist der sehr ähnlich zum Grand Canyon? Den Gedanken hatten wir, da wir sonst den riesigen \"Umweg\" nur für den Grand Canyon fahren.\t",
+    "id": 12345,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1778,
+    "created_at": "2023-04-25T08:51:35.743742Z",
+    "updated_at": "2023-04-25T08:51:35.743762Z",
+    "lead_time": 7.122
+  },
+  {
+    "text": "... ten Erschienen: Juli 2016 Gewicht: 387 g ISBN: 978-3-86883-932-6 Autor Stuart McGill ist Professor für Biomechanik an der University of Waterloo, Kanada, und international ...\t",
+    "id": 12346,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1779,
+    "created_at": "2023-04-25T08:51:43.079678Z",
+    "updated_at": "2023-04-25T08:51:43.079700Z",
+    "lead_time": 7.116
+  },
+  {
+    "text": "High-Flex Ausführung, Nennweite DN20, Temperaturfühler Pt100, Druckbeständigkeit bis 160 bar bei 210°C, T-max. 210°C. Moryl Nr. 8910.2005.00\t",
+    "id": 12347,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1780,
+    "created_at": "2023-04-25T08:51:48.287911Z",
+    "updated_at": "2023-04-25T08:51:48.287932Z",
+    "lead_time": 4.984
+  },
+  {
+    "text": "Nintendo wird von Anfang an dies Classic Mini Serie vom NES bis zum N64 geplant und dementsprechend die Hard- und Software entwickelt haben. Es ist kostenminimal diese Prozesse nur einal durchzuführen. Der \"großzügige\" Speicherplatz, sowie ein Betriebssytem welches ZIP-Dateien beherscht, lässt auf ein N64Mini mit 20 vorinstallierten Spielen hoffen.\t",
+    "id": 12348,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1781,
+    "created_at": "2023-04-25T08:51:51.547323Z",
+    "updated_at": "2023-04-25T08:51:51.547345Z",
+    "lead_time": 3.057
+  },
+  {
+    "text": "Du bist ein sehr unerfahrenes Girl ab 18J Ein attraktiver und seriöser aus Udenbreth.Hoferhof Hiltershof kontakt österreich privat nuttenkontakte Offenburg singlereisen sex ab Hillhof Hundstadt Begau anal Riehen forum sender sex kontakte analverkehr sucht aktiven Mann Vielleicht sucht noch eine Ns liebhaber sucht bis M die es mir WELCHER EHRL M NUR AB KENNT W mann funfzig aus suhl biete ov mit ns Netter Mann gepfl schlank Sauerwald Steinberg-Hart Im Dickel Eiersheim Freital was hamburgersingle sexkontakte machen date luzern Ich bin nicht besuchbar da ich in einer Beziehung lebe Kleinmenow Teisinger Berg Kuchlhof, Lieffrens Nierswalde cruz sind blickkontakt Hecklingen flirten frauen schön Für Frauen welche sich gelegentlich nach wohltuender Intimverwöhnung der besonderen Art sehnen bin ich als erfahrener Intimverwöhner m Staudigl Zell Gem Börtlingen St Aegyd-Umgebung Moutier sucht abwechslung on frau sex gaysexanzeigen cam live Suche nette Sie für regelmäßige Treffen in Biberach Spielfeld Verschönerung Haarhausen St Johann-Zentrum-Süd sado video nippelblitzer private erotik kontaktanzeigen suche gleichaltrige Partnerin in Aichtal Ruppmannsburg Stollhofen, Suche sie für treffen bei mir gegen tg in Warlow Großbirkach Wamberg Tanga Sex Bilder Sexkontakte Mit Alteren Frauen Oberstrote Bilder Aber Rehsiepen Mundeldingen Neuses a Main motorat kind sex single sexkontakte mit singles ficke kostenloser kinder bayern Wilthen mallorca An der Landstraße Steinstraß Groß Below Riesa-Canitz Ver Porno Xxx Hamburg Sex Treff Waldeck Grundlegende Informationen Zum Ausdruck Tecklinghausen Kamberg Weibhausen, aosex singleportale bdsm kontakte österreich kostenlose Aarburg, Nach einer in Splau Sub für Beziehung Suche raum Thondorf Dom Affäre Frau oder devote Klein nicht hässlich suche suche ein junges mädchen ab 18j 20j für tg in Hohelieth Sie er und massieren gerne gemeinsam den netten gepflegten großzügigen Herren mit einer schönen erotischen komplett Entspannungs Ganzkörpermassage. Sugardaddy sucht junge Geliebte für Zärtlichkeiten in Zürchau Murau-Zentralgebiet shemale dating Aspach . Suche Sie zum zuschauen in raum Ittel arbeiten von hinten ans beste Stück macht sie meiner Meinung nach auch immer noch sehr gut Letztes mal sogar so gut dass ich mich nicht mal auf den Rücken drehen wollte Also ich auf allen vieren und sie wichste mir schon einen bis zum Finale,Ficken bis zum umfallen Beiersdorf, 21 M sucht erotisches Abenteuer biete TG in raum 31517 Krummnußbaum, benutzen eines hilflosen Objekts. und besucht Paar Wir hätten gerne mal einen außergewöhnlich stark bestückten Herrn kennengelernt der sich auch ein TG für die Dame vorstellen könnte Außer bi könnten wir uns fast alles vorstellen Legen Wert auf Diskretion sauberkeit gesund Dein Alter oder Hautfarbe wäre nicht so wichtig,Erotik Kleinanzeige Eriskirch , hat eine sie Lust in raum Hüllerupfeld, mollige sucht ficker Waldau Titisee-Neustadt, geile nackte sportler Neusorg, Welche sie massiert privat gg großzügigkeit im Groß Henstedt, Wollen wir ficken Ratzeburg. kostenlosen kontakt Heilbronn. Du bist jetzt an einem TG 100€ interessiert in raum Güchenbach, XXXL wer traut sich im Wietingsbek, suche mollige oder bbw frau aus Flecksberg, videoproduktion für Fernost 1800 2300 im Sagas, Lecken und Fingerspiele aus 94157 Perlesreut, Dein jetziger Nebenjob ist nicht gut genug aus Erding, LUST AUF 200€ WAS TUST DU DAFÜR im Berk, mädchen Hülben . Tabulos ficken Zierenberg, dicke escort nutten Reichenow-Moglin, Sexdate Sandau, Mullen, suche Studentin oder junge Frau für TG Treffen Oberarnsdorf, schülerin für treffen gesucht Weyerbusch, Suche 18 jährige Girls in raum Kabelhorsterhufe. gewichst im trainingsanzug Alberswil, ausländer sucht geldsklaven Thorl, Junger Mann 25 massiert Damen gratis und diskret Juist, Gibt es denn noch in Gera andere REIFE Damen welche zu empfehlen sind Es müssen keine Thai sein das war Zufall, Älter Dame im Fegl frauen die ein taschengeld für sex nehmen in Lellichow, Hi bin etwas mollig groß und gut aussehend nicht wirklich erfahren dennoch bereit Wenn du bock hast und ich dich so richtig anfassen soll dan sieh zu und schreib mir Ich verwöhne dich so richtig gut wenn du mich lässt blasen und anfassen bis du kommst Du kannst mich gerne abholen oder evt zu mir kommen wenn es gut läuft Alles ganz diskret und sauber Eine halbe Stunde für den Anfang und vielleicht auch länger wenn du es so willst Ich freue mich auf den Kontakt LG und bis bald Biete mich für Frau gratis für Mann auf Anfrage Bironico, ich suche sexy frauen aus dem raum kürten mit telefonnummer und adresse Tenigerbad.",
+    "id": 12349,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1782,
+    "created_at": "2023-04-25T08:53:00.933219Z",
+    "updated_at": "2023-04-25T08:53:00.933238Z",
+    "lead_time": 69.195
+  },
+  {
+    "text": "Uma Thurman hat wie angekündigt ihr Schweigen gebrochen. Und dabei nicht nur erzählt, wie sie angeblich von Harvey Weinstein sexuell attackiert wurde. Auch gegen Quentin Tarantino erhebt sie schwere Vorwürfe. Dabei sah der sie immer als seine Muse an.\t",
+    "id": 12350,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1783,
+    "created_at": "2023-04-25T08:53:26.493059Z",
+    "updated_at": "2023-04-25T08:53:26.493082Z",
+    "lead_time": 25.35
+  },
+  {
+    "text": "Harvey, Alex\t Brot und Spiele...oder was ist an Alex Harvey und seiner Band sensationell?\t Gülden, Jörg\t 74/07\t",
+    "id": 12351,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1784,
+    "created_at": "2023-04-25T08:54:41.566244Z",
+    "updated_at": "2023-04-25T08:54:41.566265Z",
+    "lead_time": 14.169
+  },
+  {
+    "text": "Veröffentlicht am 10. Dezember 2013, in Ärgerliches. Setze ein Lesezeichen auf den Permalink.\t16 Kommentare.",
+    "id": 12352,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1785,
+    "created_at": "2023-04-25T08:54:56.689976Z",
+    "updated_at": "2023-04-25T08:54:56.689998Z",
+    "lead_time": 14.877
+  },
+  {
+    "text": "Da es verständlicherweise Irritationen gibt, stelle ich Euch hier nun mal Apac vor. Den kleinen Verein und deren kleines Tierheim in Cadaval, lernten wir im Februar 2017 kennen. Eines der vielen kleinen…\t",
+    "id": 12353,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1786,
+    "created_at": "2023-04-25T08:55:02.842145Z",
+    "updated_at": "2023-04-25T08:55:02.842167Z",
+    "lead_time": 5.954
+  },
+  {
+    "text": "Klosterkirche der Schulschwestern zu unserer Lieben Frau in Auerbach (Oberpfalz) Orgelneubau 2006 durch Orgelbau Siegfried Schmid (Immenstadt) Intonation: Stefan Niebler 23 Register auf zwei Manualen und Pedal Während eines feierlichen…\t",
+    "id": 12354,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1787,
+    "created_at": "2023-04-25T08:55:13.257273Z",
+    "updated_at": "2023-04-25T08:55:13.257294Z",
+    "lead_time": 10.206
+  },
+  {
+    "text": "Autor StellanVeröffentlicht am 20. Januar 2017 29. Januar 2017 Kategorien Fernbus, FlixbusSchlagwörter Europa, Fernbus, Flixbus, Gutschein, meinFernbus, Netto\t",
+    "id": 12355,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1788,
+    "created_at": "2023-04-25T08:55:19.856884Z",
+    "updated_at": "2023-04-25T08:55:19.856906Z",
+    "lead_time": 6.346
+  },
+  {
+    "text": "Bist du ein Held ... oder bist du die böse Königin? Finde heraus, welche Fee du bist und auf welcher Seite du stehst.\t",
+    "id": 12356,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1789,
+    "created_at": "2023-04-25T08:55:25.757319Z",
+    "updated_at": "2023-04-25T08:55:25.757341Z",
+    "lead_time": 5.669
+  },
+  {
+    "text": "Autor djadmorosVeröffentlicht am 20. Februar 2016 10. März 2017 Katgeorien Allgemein10 Kommentare zu 1 : 750.000 oder Die Mutter aller Schlachten: Einhundert Jahre »Verdun«\t",
+    "id": 12357,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1790,
+    "created_at": "2023-04-25T08:55:51.311649Z",
+    "updated_at": "2023-04-25T08:55:51.311676Z",
+    "lead_time": 25.323
+  },
+  {
+    "text": "Ich bin mal gespannt. Die Pferde empfand ich bisher als ehr nutzlos und habe sie nur für die Nebenquests genutzt in denen sie benötigt wurde.\t",
+    "id": 12358,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1791,
+    "created_at": "2023-04-25T08:55:58.494719Z",
+    "updated_at": "2023-04-25T08:55:58.494741Z",
+    "lead_time": 6.939
+  },
+  {
+    "text": "Da wir uns seit vielen Jahren mit den Thematiken\tDachreinigung, Dachsanierung und/ oder Dachbeschichtung in und um Augsburg beschäftigen, können wir Ihnen zu Ihrer Suche nach\tDachreinigung, Dachsanierung und/ oder Dachbeschichtung\tu.a. vor Ort z.B in und um Stuttgart, Augsburg, Hildesheim, Ulm, Reutlingen, Kleinaitingen-Augsburg, langjährige Erfahrung bieten. Aber wir bieten mehr: Expertise und Kompetenz spezifisch zu Dachbeschichtung u.a. vor Ort z.B in\tKleinaitingen-Augsburg, oder allgemein zu Dachreinigung, Dachsanierung und/ oder Dachbeschichtung.\t",
+    "id": 12359,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1792,
+    "created_at": "2023-04-25T08:56:13.663039Z",
+    "updated_at": "2023-04-25T08:56:13.663059Z",
+    "lead_time": 14.981
+  },
+  {
+    "text": "Das Gewicht kann ich bei diesem Modell nicht beanstanden, da es ein Aluminium-Rad ist; das leichte Gewicht ist mir als erstes aufgefallen, vielleicht auch deswegen, weil ich vorher noch keins aus Alu in der Hand hatte. (Es mag allenfalls, für ein Aluminium-Rad relativ (!) schwer sein...)\t",
+    "id": 12360,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1793,
+    "created_at": "2023-04-25T08:56:21.794305Z",
+    "updated_at": "2023-04-25T08:56:21.794326Z",
+    "lead_time": 7.924
+  },
+  {
+    "text": "Gerade einmal zwei Spieltage ist die Rückrunde alt und auf Schalke brennt wieder der Baum. Schalke holt gegen Augsburg nur einen Punkt und stolpert bereits am Anfang der Aufholjagd zu den Champions League Plätzen. Wohlgemerkt, ein Ziel, welches Vorstand und Mannschaft gleichermaßen vor Beginn der Rückrunde ausgegeben haben. Die nüchterne Realität hat Schalke schnell wieder",
+    "id": 12361,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1794,
+    "created_at": "2023-04-25T08:56:30.165561Z",
+    "updated_at": "2023-04-25T08:56:30.165585Z",
+    "lead_time": 8.181
+  },
+  {
+    "text": "Ich hatte immer eine große Angst vor Haupt- und Realschülern und habe immer auf dem Nachhauseweg einen großen Bogen um die Hauptschule gemacht.\t",
+    "id": 12364,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1797,
+    "created_at": "2023-04-25T08:57:13.921046Z",
+    "updated_at": "2023-04-25T08:57:13.921065Z",
+    "lead_time": 4.427
+  },
+  {
+    "text": "Entertainment, Komik, Vokalartistik, Witzbold. Die besten Komiker erkennt man daran, dass sie nicht erklären können, warum sie komisch sind. Wie kaum ein anderer schafft es Jojo Weiß, ein Publikum innerhalb weniger Augenblicke in seinen Bann zu...\t",
+    "id": 12365,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1798,
+    "created_at": "2023-04-25T08:57:20.526462Z",
+    "updated_at": "2023-04-25T08:57:20.526484Z",
+    "lead_time": 6.406
+  },
+  {
+    "text": "Darüber hinaus profitiert die Bäckerei und Konditorei von den weiteren Angeboten des Portals. So informiert Einkaufsstadt Neumarkt über die Parkmöglichkeiten im Stadtbereich  einschließlich der Echtzeit-Anzeige der freien Stellplätze in den Parkhäusern und gibt Veranstaltungstipps. Wer als Besucher Neumarkts das kostenlose WLAN der Stadt nutzt, wird außerdem automatisch zur Einkaufsstadt Neumarkt geleitet und kann in dessen Angebot stöbern.",
+    "id": 12366,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1799,
+    "created_at": "2023-04-25T08:57:27.219417Z",
+    "updated_at": "2023-04-25T08:57:27.219438Z",
+    "lead_time": 6.488
+  },
+  {
+    "text": "ausreichen würde für meinen Bedarf. Muss also keine Andere kaufen denke ich, oder wäre die Nvidia GeForce GT 730 4GB RAM Grafikkarte\t(+€73,00) besser?",
+    "id": 12367,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1800,
+    "created_at": "2023-04-25T08:57:34.998329Z",
+    "updated_at": "2023-04-25T08:57:34.998352Z",
+    "lead_time": 7.531
+  },
+  {
+    "text": "Die Fragestellung der besonderen Epoche des Kapitalismus, die Lenin mit dem Begriff Imperialis­mus aufwarf, wird in den Thesen nicht berührt.",
+    "id": 12368,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1801,
+    "created_at": "2023-04-25T08:57:40.177519Z",
+    "updated_at": "2023-04-25T08:57:40.177542Z",
+    "lead_time": 4.921
+  },
+  {
+    "text": "Veröffentlicht unter Und sonst so\t| Verschlagwortet mit Christopher Nöthe, FC St.Pauli, Marius Ebbers, Ralph Gunesch, Social Media, Viva con Agua\t| 16 Kommentare",
+    "id": 12369,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1802,
+    "created_at": "2023-04-25T08:57:50.167836Z",
+    "updated_at": "2023-04-25T08:57:50.167859Z",
+    "lead_time": 9.738
+  },
+  {
+    "text": "Tante Edith sagt: klar entscheiden dass die Forenmods. Aber wir können dennoch schaun und sammeln was wir wollen und brauchen.\t",
+    "id": 12370,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1803,
+    "created_at": "2023-04-25T08:58:05.473285Z",
+    "updated_at": "2023-04-25T08:58:05.473305Z",
+    "lead_time": 15.056
+  },
+  {
+    "text": "Nun, was heißt \"dumpf\"? Die Aufnahmen besitzen einen wundervoll runden Klang, die Barockinstrumente klingen sehr natürlich - und eben nicht so hell und durchdringend wie modernere Varianten. Dazu kommt die Aufnahmetechnik, die keinen Close-Miked-Breitwandsound liefert, sondern mehr nach einer minimalistischen Aufnahme klingt, wo wenige Mikrophone in größerer Distanz aufgestellt sind. Die Soundschnipsel variieren etwas im Klang - es gibt auch unterschiedliche Besetzungen - aber besitzen durchgehend einen sehr schönen, entspannten Klang, der das Hören zum Vergnügen macht. Hätten die Toningenieure von Anfang an derartig wohltönende Digitalaufnahmen zustande gebracht, wären den Analogfans sehr schnell die Argumente ausgegangen.\t",
+    "id": 12371,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1804,
+    "created_at": "2023-04-25T08:58:10.160323Z",
+    "updated_at": "2023-04-25T08:58:10.160347Z",
+    "lead_time": 4.496
+  },
+  {
+    "text": "Das kannst du sowohl mit der cbs Version machen (Diese benutze ich nur noch), als auch mit der normalen DVD-Version.\t",
+    "id": 12372,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1805,
+    "created_at": "2023-04-25T08:58:14.072700Z",
+    "updated_at": "2023-04-25T08:58:14.072722Z",
+    "lead_time": 3.669
+  },
+  {
+    "text": "Die meisten Browser sind standardmäßig so eingestellt, dass Cookies akzeptiert werden. Sie können Ihren Browser aber auch so einstellen, dass alle Cookies abgelehnt werden oder dass Sie eine Meldung erhalten, wenn Cookies versandt werden. Es ist jedoch möglich, dass einige Funktionen und Dienste auf unserer und auf anderen Websites nicht richtig funktionieren, wenn in Ihrem Browser alle Cookies deaktiviert sind.\t",
+    "id": 12373,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1806,
+    "created_at": "2023-04-25T08:58:18.161325Z",
+    "updated_at": "2023-04-25T08:58:18.161345Z",
+    "lead_time": 3.904
+  },
+  {
+    "text": "Autor ReinhardVeröffentlicht am 12. August 2014 10. Dezember 2016 Kategorien UmweltSchlagwörter Gase, Jeff Anhang, Kalifornien, Klimakiller, klimaschädliche, Klimaschutz, Konsum, Rinderzucht, Rindfleisch, Robert Goodland, Sponsoren, Treibhausgase, Umwelt, worldwatchSchreibe einen Kommentar zu Cowspiracy\t",
+    "id": 12374,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1807,
+    "created_at": "2023-04-25T08:58:25.242670Z",
+    "updated_at": "2023-04-25T08:58:25.242693Z",
+    "lead_time": 6.876
+  },
+  {
+    "text": "The Flashbulb Madness RPG. Ein sehr verrücktes und riesengroßes Open World RPG von einem griechischen Game Designer. Leider ist die Webseite mittlwerile down und ich weiß nicht, ob es das Spiel noch irgendwo gibt. Es hat leider auch sehr viele gröbere Bugs, die nie gefixt wurden.\t",
+    "id": 12375,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1808,
+    "created_at": "2023-04-25T08:58:32.440424Z",
+    "updated_at": "2023-04-25T08:58:32.440444Z",
+    "lead_time": 6.99
+  },
+  {
+    "text": "Command & Conquer - Remaster von Der Tiberiumkonflikt und Alarmstufe Rot angekündigt; Petroglyph involviert\t72",
+    "id": 12376,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1809,
+    "created_at": "2023-04-25T08:58:39.839381Z",
+    "updated_at": "2023-04-25T08:58:39.839403Z",
+    "lead_time": 7.148
+  },
+  {
+    "text": "Donnerstag, 04.04.2019 – Sonntag, 07.04.2019 Opatija ist immer eine Reise wert, insbesondere im Frühling. Wenn dann noch eine musikalische Untermalung hinzukommt, stehen entspannten Tagen nichts mehr im Wege. 1. Tag:…\t",
+    "id": 12377,
+    "sentiment": "clean",
+    "annotator": 1,
+    "annotation_id": 1810,
+    "created_at": "2023-04-25T08:58:48.021392Z",
+    "updated_at": "2023-04-25T08:58:48.021412Z",
+    "lead_time": 7.98
+  },
+  {
+    "text": "Das Beste Von Möbel Segmüller Pulheim Alles Im Detail - Durch die Tausend Fotos online in Bezug auf möbel segmüller pulheim , wir wählt das allerbeste Sammlungen haben ideal Bildauflösung einfach für Sie, ​​und das Fotos ist eines von Bilder Sammlungen in diesem am besten Fotos gallery über Das Beste Von Möbel Segmüller Pulheim Alles Im Detail. Lass uns hoffen Sie können wollen es. This specific Grafik (Möbel Segmüller Pulheim Erstaunlich Oot) vorhergehend kann sein gebrandet benutze: lounge m bel garten segm ller,m bel bei segm ller,m bel r ckgabe segm ller,m bel segm ller adresse,m bel segm ller boxspringbetten,m bel segm ller eckbank,m bel segm ller gutschein,m bel segm ller mannheim prospekt,m bel segm ller n rnberg m geldorf,m bel segm ller pulheim,m bel segm ller pulheim anfahrt,m bel segm ller sessel,m bel segm ller sofas,segm ller m bel abholen,voglauer m bel segm ller, gepostet mittels ozile bei 2018-10-28 06:53:00. Um zu entdecken fast alle Fotos innen Das Beste Von Möbel Segmüller Pulheim Alles Im Detail Fotos gallery erinnere dich an halten Sie sich an diese URL. Die meisten Elegant zusammen mit Attraktiv möbel segmüller pulheim in Bezug Wirklich ermutigen Ihr Eigentum Vorhanden Haus Gemütlich Traum Haushalt.\t",
+    "id": 12380,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1813,
+    "created_at": "2023-04-25T08:59:22.469877Z",
+    "updated_at": "2023-04-25T08:59:22.469900Z",
+    "lead_time": 15.311
+  },
+  {
+    "text": "Veröffentlicht unter Garten, Obst - Beeren - Früchte\t| Verschlagwortet mit Beeren, Früchte, Garten, Minikiwi, Naschfrüchte, Obst, Rankpflanze, Saison, Selbstversorgung, Spalierobst\t| Hinterlasse einen Kommentar",
+    "id": 12381,
+    "sentiment": "spam",
+    "annotator": 1,
+    "annotation_id": 1814,
+    "created_at": "2023-04-25T08:59:31.921291Z",
+    "updated_at": "2023-04-25T08:59:31.921314Z",
+    "lead_time": 9.241
   }
 ]
