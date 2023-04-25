@@ -9,3 +9,10 @@
 ```
 jq -r '.[].text' files/SVM/label_studio-min.json > label_studio.raw
 ```
+
+## properties of labelled data
+- overall: 1800, 100,0%
+- clean:   1466,  81,5%
+- other:    334,  15,5%
+    - mixed: 90
+    - spam: 244
