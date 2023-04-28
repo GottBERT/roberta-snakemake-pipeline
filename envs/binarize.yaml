@@ -1,5 +1,0 @@
-channels:
-  - conda-forge
-dependencies:
-  - pip:
-    - fairseq==0.10.0

@@ -1,0 +1,14 @@
+[package]
+name = "compute_ratios"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+natural = "0.3.0"
+itertools = "0.10.5"
+polars = { version = "0.28.0", features = ["polars-io"] }
+polars-io = { version = "0.28.0", features = ["parquet"] }
+polars-arrow = "0.28.0"
+clap = "2.33.3"

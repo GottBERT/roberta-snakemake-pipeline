@@ -1,0 +1,61 @@
+# path to the file, containing all data (one document per line), which should be filtered
+in_file: ../files/example/de_dedup.txt
+
+# text language
+# supported languages:
+#  - German
+language: German
+
+ratio_file_stop_words: scripts/compute_ratios/src/stopwords/german
+ratio_file_test: ratios_test.parquet
+ratio_file_train: ratios_train.parquet
+
+
+# number of files, the main file will be split into,
+# which is used for parallel processing, 
+# we suggest, to take number of cores/threats (nproc --all)
+num_files: 8
+
+# lines of the input file
+# if you have a large file which number of lines are known, it saves you time to define it
+# otherwise, just use some number <=0 and the workflow will count the lines for you
+file_lines: 0
+
+# output directory, relative from the workflow folder
+dir_output: ../output
+
+## SVM
+######
+
+# filename of the svm files, which will be saved in dir_output
+svm_file_model: oneclasssvm.joblib
+svm_file_metrics: metrics.json
+
+# files used for training/testing the 1class SVM
+# based on these files ratios are computed for each document
+# which are used for classification
+svm_txt_train: ../files/SVM/train.raw
+svm_txt_test: ../files/SVM/label_studio.raw
+
+# for detailed explanation of the parameters take a look at https://scikit-learn.org/stable/modules/generated/sklearn.svm.OneClassSVM.html
+# nu parameter for single class SVM as comma separated string using multipe values
+# can be genrated analog to e.g. `import numpy as np; print(','.join(str(x.round(3)) for x in np.append(np.arange(0.0,1.0, 0.01)[1:],[1.0])))`
+svm_nu: 0.2,0.4,0.6,0.8,1.0
+svm_tol: 0.003,0.002
+svm_gamma: scale,auto
+svm_cache_size: 200
+
+# some log csv, which shows the metrics for all nu
+svm_file_train_log: svm_train.csv
+
+# path to the groundtruth file, i.e. label studio annotation dump
+svm_file_gt: ../files/SVM/label_studio-min.json
+
+# quality threshold for language detection
+# the higher, the more accurate the language confimity must be
+whatlang_threashold: 1.0
+
+# minimal tokens a document should have; documents with less tokens are filtered out.
+min_tokens: 40
+
+

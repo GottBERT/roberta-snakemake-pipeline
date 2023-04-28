@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+dependencies:
+  # installing Python 3.10 as not working with Python 3.11 to the time being
+  # see for status at https://github.com/facebookresearch/fairseq/pull/5062
+  - python=3.10 
+  - pip:
+    - fairseq==0.12.2
