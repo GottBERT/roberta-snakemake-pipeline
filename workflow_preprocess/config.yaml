@@ -5,7 +5,7 @@ in_file: ../files/example/de_dedup.txt
 vocab_size: 520
 
 # number of randomly selected documents for the validation & test set
-nun_docs_valid_test_set: 120
+num_docs_valid_test_set: 120
 
 # size in bytes, with which BPE is created e.g.: 7GB = 7000000000
 size_bpe_train_file: 4000
