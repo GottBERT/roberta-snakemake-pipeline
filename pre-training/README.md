@@ -13,7 +13,7 @@ This repo provides two shell scripts for TPU computation:
 
 1 is intended for single TPU training, whereas 2 is intended for a TPU Pod computation. Depending on data size, a decent vm should be chosen, a a s fairseq stores a lot of data memory. For GottBERT which result in a ~60GB binary blob, we used n1-highmem-32 machines to steer a 256 core TPU pod. It is required to take 1 vm per 8 cores, which makes 32 machines for a 256 core TPU pod. We recommend to setup the VMs without the feature of automatically removing the discs, as the scripts remove the VMs in the end. Like that, after training you can remove the expensive VMs without losing your resulting model.
 
-Further, the batch size has to be chosen. Therefore, we have three Variables to setup in both script:
+Further, the batch size has to be chosen accordingly. Therefore, we have three Variables to setup in both script:
 ```bash
 MAX_SENTENCES=16              # Number of sequences per batch (batch size)
 UPDATE_FREQ=16                # Increase the batch size 16x
