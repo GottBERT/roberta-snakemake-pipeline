@@ -147,31 +147,25 @@ rule binarize:
       --workers 60
     """
 
-# if dict.txt exists never run this stream
-def block_if_dict(wildcards):
-    if os.path.exists(output('bpe_enc/dict.txt')):
-      return output('file_that_never_exists')
-    else:
-      return output('bin/dict.txt')
-
-rule patch_dict:
+rule patch_vocab:
   input:
-    dict_file=block_if_dict,
-    bpe_json=output('bpe_enc/vocab.json')
-  output: 
-    dict_backup=output('bin/dict.txt.bu'),
-    dict_file_bpe=output('bpe_enc/dict.txt')
-  conda: "envs/patch_dict.yaml"
+    vocab_json=output('bpe_enc/vocab.json'),
+    dict_file=output('bin/dict.txt')
+  output:
+    vocab_json_bin=output('bin/vocab.json'),
+    bpe_json_backup=output('bpe_enc/vocab.json.bu'),
+    flag=output('bpe_patched')
   params:
-    dir_bin=output('bin')
+    dir_bpe=output('bpe_enc')
   shell: """
-    scripts/patch_dict.py --dir {params.dir_bin} --vocab_json {input.bpe_json} \
-      && cp {input.dict_file} {output.dict_file_bpe}
+    scripts/patch_vocab.py --dir {params.dir_bpe} --dict_file {input.dict_file} \
+      && cp {input.vocab_json} {output.vocab_json_bin} && touch {output.flag}
   """
 
 rule copy_bpe:
   input:
-    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt'])
+    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt']),
+    bpe_enc_patched=output('bpe_patched.flag')
   output: expand(output('bin/{sample}'), sample=['vocab.json', 'merges.txt']),
   shell: """
       arr_in=({input.bpe_enc})
