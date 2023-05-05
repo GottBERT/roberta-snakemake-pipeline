@@ -74,7 +74,9 @@ rule apply_bpe:
     "envs/bpe.yaml"
   params:
     dir_bpe=output('bpe_enc')
-  shell: "scripts/apply_bpe.py --bpe {params.dir_bpe} --out {output} {input.raw}"
+  shell: """scripts/apply_bpe{config[bpe_apply_parallel]}.py \
+              --bpe {params.dir_bpe} --dir_tmp {config[bpe_apply_dir_tmp]} \
+              --cores {config[num_files]} --out {output} {input.raw}"""
 
 def enable_if_dict(wildcards):
     if not os.path.exists(output('bpe_enc/dict.txt')):

@@ -10,6 +10,18 @@ num_docs_valid_test_set: 120
 # size in bytes, with which BPE is created e.g.: 7GB = 7000000000
 size_bpe_train_file: 4000
 
+# the number of splits created in parallel computation
+# usually this equals to `nproc --a`
+num_files: 12
+
+# leave empty if sequential computation is desired
+# this might be in case of limited disk space 
+bpe_apply_parallel: _parallel
+
+# tmp folder in which split files will be stored 
+# in case of parrallel computation
+bpe_apply_dir_tmp: /tmp
+
 # text language
 # supported languages:
 #  - German
