@@ -147,6 +147,29 @@ rule binarize:
       --workers 60
     """
 
+# if dict.txt exists never run this stream
+def block_if_dict(wildcards):
+    if os.path.exists(output('bpe_enc/dict.txt')):
+      return output('file_that_never_exists')
+    else:
+      return output('bin/dict.txt')
+
+rule patch_dict:
+  input:
+    dict_file=block_if_dict,
+    bpe_json=output('bpe_enc/vocab.json')
+  output: 
+    dict_backup=output('bin/dict.txt.bu'),
+    dict_file_bpe=output('bpe_enc/dict.txt')
+  conda: "envs/patch_dict.yaml"
+  params:
+    dir_bin=output('bin')
+  shell: """
+    scripts/patch_dict.py --dir {params.dir_bin} --vocab_json {input.bpe_json} \
+      && cp {input.dict_file} {output.dict_file_bpe}
+  """
+
+
 rule patch_vocab:
   input:
     vocab_json=output('bpe_enc/vocab.json'),
