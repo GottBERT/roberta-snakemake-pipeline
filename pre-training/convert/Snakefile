@@ -1,0 +1,22 @@
+configfile: "config.yaml"
+
+# from iso639 import languages
+import os
+
+def output(file, output_dir = config['dir_output']):
+  return os.path.join(output_dir, file)
+
+rule convert:
+    input: 
+        file=config['file_checkpoint']
+    output: 
+        dir=directory(output(config['pytorch_dump_folder_path'])),
+        model=output(os.path.join(config['pytorch_dump_folder_path'], 'pytorch_model.bin')),
+        vocab=output(os.path.join(config['pytorch_dump_folder_path'], 'vocab.json')),
+        merges=output(os.path.join(config['pytorch_dump_folder_path'], 'merges.txt')),
+    log: output('convert.log')
+    conda: "envs/convert.yaml"
+    shell: """
+        ./scripts/convert_gottbert_original_pytorch_checkpoint_to_pytorch.py \
+        --robert_checkpoint_file {input.file} --pytorch_dump_folder_path {output.dir} &> {log}
+    """
