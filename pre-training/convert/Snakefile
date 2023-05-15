@@ -6,7 +6,7 @@ import os
 def output(file, output_dir = config['dir_output']):
   return os.path.join(output_dir, file)
 
-rule convert:
+rule all:
     input: 
         file=config['file_checkpoint']
     output: 
@@ -19,4 +19,7 @@ rule convert:
     shell: """
         ./scripts/convert_gottbert_original_pytorch_checkpoint_to_pytorch.py \
         --robert_checkpoint_file {input.file} --pytorch_dump_folder_path {output.dir} &> {log}
+        
+        # check if models equal
+        cat {log} | grep 🔥|| exit 1
     """

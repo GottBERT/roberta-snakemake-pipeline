@@ -7,4 +7,4 @@ pytorch_dump_folder_path: mymodel
 # - vocab.json
 # - merges.txt
 # in the same directory
-file_checkpoint: ../../files/checkpoints/checkpoint.pt
+file_checkpoint: /some/dir/with/checkpoints/checkpoint.pt

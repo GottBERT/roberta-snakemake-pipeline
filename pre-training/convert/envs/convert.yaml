@@ -3,11 +3,13 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.9
+  - python=3.8
   - pip:
-    - transformers==4.29.1
-    # - torch==1.13.0
+    - sentencepiece==0.1.91
+    - protobuf==3.20.3
+    - transformers==3.5.1
+    - torch==1.5.1
     # - sentencepiece==0.1.99
     # - tokenizers==0.13.3
-    - fairseq==0.12.2
-
+    - fairseq==0.10.2
+    - numpy==1.23.5
