@@ -169,27 +169,9 @@ rule patch_dict:
       && cp {input.dict_file} {output.dict_file_bpe}
   """
 
-
-rule patch_vocab:
-  input:
-    vocab_json=output('bpe_enc/vocab.json'),
-    dict_file=output('bin/dict.txt')
-  output:
-    vocab_json_bin=output('bin/vocab.json'),
-    bpe_json_backup=output('bpe_enc/vocab.json.bu'),
-    flag=output('bpe_patched.flag')
-  conda: "envs/patch.yaml"
-  params:
-    dir_bpe=output('bpe_enc')
-  shell: """
-    scripts/patch_vocab.py --dir {params.dir_bpe} --dict_file {input.dict_file} \
-      && cp {input.vocab_json} {output.vocab_json_bin} && touch {output.flag}
-  """
-
 rule copy_bpe:
   input:
-    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt']),
-    bpe_enc_patched=output('bpe_patched.flag')
+    bpe_enc=expand(output('bpe_enc/{sample}'), sample=['vocab.json', 'merges.txt'])
   output: expand(output('bin/{sample}'), sample=['vocab.json', 'merges.txt']),
   shell: """
       arr_in=({input.bpe_enc})

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import re
 import fire
 
-def generate_plot(logfile, dir_target, log_interval)
+def generate_plot(logfile, dir_target, log_interval):
 
   # Open a file: file
   file = open(logfile, mode='r')
