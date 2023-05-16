@@ -5,7 +5,7 @@ import os
 def output(file, output_dir = config['dir_output']):
   return os.path.join(output_dir, file)
 
-ruleorder: binarize_dict > binarize > learn_bpe > patch_dict > patch_vocab > copy_bpe
+ruleorder: binarize_dict > binarize > learn_bpe > patch_dict > copy_bpe
 
 rule all:
   input:
