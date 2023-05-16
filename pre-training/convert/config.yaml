@@ -1,0 +1,10 @@
+# output directory
+dir_output: output
+# subdir of dir_output in which the packed model will be stored
+pytorch_dump_folder_path: mymodel
+
+# input checkpoint file, which must have
+# - vocab.json
+# - merges.txt
+# in the same directory
+file_checkpoint: /some/dir/with/checkpoints/checkpoint.pt
