@@ -15,11 +15,16 @@ rule all:
         vocab=output(os.path.join(config['pytorch_dump_folder_path'], 'vocab.json')),
         merges=output(os.path.join(config['pytorch_dump_folder_path'], 'merges.txt')),
     log: output('convert.log')
+    params: 
+        indir=os.path.split(config['file_checkpoint'])[0],
+        outdir=output(config['pytorch_dump_folder_path'])
     conda: "envs/convert.yaml"
     shell: """
         ./scripts/convert_gottbert_original_pytorch_checkpoint_to_pytorch.py \
         --robert_checkpoint_file {input.file} --pytorch_dump_folder_path {output.dir} &> {log}
-        
+
+        ./scripts/convert_vocab.py --indir {params.indir} --outdir {params.outdir} &>> {log}
+
         # check if models equal
         cat {log} | grep 🔥|| exit 1
     """

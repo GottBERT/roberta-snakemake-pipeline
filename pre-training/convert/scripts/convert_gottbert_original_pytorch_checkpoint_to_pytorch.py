@@ -159,12 +159,6 @@ def convert_roberta_checkpoint_to_pytorch(
     print(f"Saving model to {pytorch_dump_folder_path}")
     model.save_pretrained(pytorch_dump_folder_path)
 
-    # just copy the BPE files over to the converted model's path
-    copyfile(os.path.join(roberta_checkpoint_path, 'merges.txt'), 
-             os.path.join(pytorch_dump_folder_path, 'merges.txt'))
-    copyfile(os.path.join(roberta_checkpoint_path, 'vocab.json'), 
-             os.path.join(pytorch_dump_folder_path, 'vocab.json'))
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     # Required parameters
@@ -180,9 +174,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     path, filename = os.path.split(args.robert_checkpoint_file)
-
-    print(path)
-    print(filename)
 
     convert_roberta_checkpoint_to_pytorch(
         path, filename, args.pytorch_dump_folder_path, args.classification_head
