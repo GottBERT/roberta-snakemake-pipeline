@@ -164,7 +164,7 @@ fn main() {
                 // after puctuation, in German, one continues to write in capital
                 let mut upper_to_punct_ratio = 0.0;
                 if num_punctuation > 0 && num_upper > 0 {
-                upper_to_punct_ratio = (num_upper as f64/num_punctuation as f64) / num_upper as f64;
+                    upper_to_punct_ratio = num_upper as f64/num_punctuation as f64;
                 }
 
                 vec_stopword_ratio.push(stopword_ratio);
