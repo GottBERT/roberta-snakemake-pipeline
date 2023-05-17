@@ -17,7 +17,7 @@ df = pl.read_parquet(args.in_ratio)
 
 # Select subset of ratios as model features
 X = df.select(["stopword_ratio", "punctuation_ratio",
-        "token_ratio", "upper_ratio", "upper_to_punct_ratio"]).to_numpy()
+        "token_ratio", "upper_ratio"]).to_numpy()
 
 predictions = clf.predict(X)
 df = df.with_columns(pl.Series(name="prediction", values=predictions))

@@ -41,7 +41,7 @@ args = parser.parse_args()
 pd_label_studio = pd.read_json(args.in_groundtruth)
 
 # Select a subset of ratios as model features
-cols = ["stopword_ratio", "punctuation_ratio", "token_ratio", "upper_ratio", "upper_to_punct_ratio"]
+cols = ["stopword_ratio", "punctuation_ratio", "token_ratio", "upper_ratio"]
 df_train = pd.read_parquet(args.in_train)[cols].astype(float)
 df_test = pd.read_parquet(args.in_test)[cols].astype(float)
 
