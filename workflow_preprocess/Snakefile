@@ -1,6 +1,7 @@
 configfile: "config.yaml"
 
 import os
+from pathlib import Path
 
 def output(file, output_dir = config['dir_output']):
   return os.path.join(output_dir, file)
@@ -38,9 +39,18 @@ rule prepare_dataset:
     output_raw=output('raw'),
   shell: "{input.bin} --in {input.in_file} --out {params.output_raw} --num {params.num_lines}"
 
+def enable_if_no_bpe(wildcards):
+  if (os.path.exists(output('bpe_enc/dict.txt')) and
+    os.path.exists(output('bpe_enc/merges.txt')) and
+    os.path.exists(output('bpe_enc/vocab.json'))):
+    return output('file_that_never_exists')
+  else:
+    filename = config['in_file']
+    Path(filename).touch()
+    return filename
 
 rule shuffle_file:
-  input:  '{sample}'.format(sample=config['in_file'])
+  input: enable_if_no_bpe
   output: output('bpe_train/shuffled_file.raw')
   shell: "shuf {input} > {output}"
 
