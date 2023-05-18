@@ -7,3 +7,4 @@ dependencies:
     - fastparquet==2023.2.0
     - joblib==1.2.0
     - polars==0.16.18
+    - tqdm==4.65.0

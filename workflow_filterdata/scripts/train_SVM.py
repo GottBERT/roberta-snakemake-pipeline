@@ -11,6 +11,7 @@ from joblib import load, dump
 import argparse
 import json
 
+from tqdm import tqdm
 from sklearn.metrics import (
     confusion_matrix,
     accuracy_score,
@@ -55,9 +56,14 @@ idx_train = df_train.reset_index()['index'].to_numpy()
 df_eval = pd.DataFrame(columns=['nu', 'tol', 'gamma', 'accuracy', 'precision', 'recall', 'weighted_f1_score', 'mcc', 'report', 'model'])
 
 # estimate best SVM given nu
-for nu in list(map(lambda e: float(e), args.nu.split(","))):
-    for tol in list(map(lambda e: float(e), args.tol.split(","))):
-        for gamma in list(args.gamma.split(",")):
+list_nu = args.nu.split(",")
+list_tol = args.tol.split(",")
+list_gamma = args.gamma.split(",")
+
+pbar = tqdm(total=len(list_nu)*len(list_tol)*len(list_gamma))
+for nu in list(map(lambda e: float(e), list_nu)):
+    for tol in list(map(lambda e: float(e), list_tol)):
+        for gamma in list(list_gamma):
             try:
                 # create and train model
                 model = svm.OneClassSVM(nu=nu, tol=tol, gamma=gamma, cache_size=int(args.cache_size))
@@ -109,7 +115,7 @@ for nu in list(map(lambda e: float(e), args.nu.split(","))):
             list_row = [nu, tol, gamma, accuracy, precision, recall, f1score, abs(mcc), report, model]
             df_eval.loc[len(df_eval)] = list_row
 
-
+            pbar.update(1)
             # print(f"Accuracy = {accuracy.round(4)}")
             # print(f"Precision = {precision.round(4)}")
             # print(f"Recall = {recall.round(4)}")
@@ -117,7 +123,8 @@ for nu in list(map(lambda e: float(e), args.nu.split(","))):
             # print(f"MCC = {mcc.round(4)}")
 
             # print(classification_report(y_test, y_test_predictions, target_names=['dirty', 'clean']))
-    
+
+pbar.close()
 
 # estimate best model
 o_best_model = df_eval.iloc[df_eval['mcc'].idxmax()]
