@@ -129,7 +129,7 @@ rule binarize_dict:
       --validpref {params.dir_bpe}/valid.bpe \
       --testpref {params.dir_bpe}/test.bpe \
       --destdir {params.dir_bin} \
-      --workers 60
+      --workers {config[num_files]}
   """
 
 
@@ -154,7 +154,7 @@ rule binarize:
       --validpref {params.dir_bpe}/valid.bpe \
       --testpref {params.dir_bpe}/test.bpe \
       --destdir {params.dir_bin} \
-      --workers 60
+      --workers {config[num_files]}
     """
 
 # if dict.txt exists never run this stream
