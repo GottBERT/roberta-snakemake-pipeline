@@ -90,7 +90,7 @@ def main():
 
     # parallel execute
     files = glob.glob(f"{tmp_file_pattern}*")
-    pool = multiprocessing.Pool(args.cores)
+    pool = multiprocessing.Pool(int(args.cores))
 
     skipped = pool.map(
                     partial(encode,
