@@ -28,10 +28,15 @@ import torch
 from fairseq.models.roberta import RobertaModel as FairseqRobertaModel
 from fairseq.modules import TransformerSentenceEncoderLayer
 from packaging import version
-from shutil import copyfile
 
-from transformers.modeling_bert import BertIntermediate, BertLayer, BertOutput, BertSelfAttention, BertSelfOutput
-from transformers.modeling_roberta import RobertaConfig, RobertaForMaskedLM, RobertaForSequenceClassification
+from transformers.models.bert.modeling_bert import (
+    BertIntermediate,
+    BertLayer,
+    BertOutput,
+    BertSelfAttention,
+    BertSelfOutput,
+)
+from transformers import RobertaConfig, RobertaForMaskedLM, RobertaForSequenceClassification
 from transformers.utils import logging
 
 
@@ -56,10 +61,10 @@ def convert_roberta_checkpoint_to_pytorch(
     roberta_sent_encoder = roberta.model.encoder.sentence_encoder
     config = RobertaConfig(
         vocab_size=roberta_sent_encoder.embed_tokens.num_embeddings,
-        hidden_size=roberta.args.encoder_embed_dim,
-        num_hidden_layers=roberta.args.encoder_layers,
-        num_attention_heads=roberta.args.encoder_attention_heads,
-        intermediate_size=roberta.args.encoder_ffn_embed_dim,
+        hidden_size=roberta.cfg.model.encoder_embed_dim,
+        num_hidden_layers=roberta.cfg.model.encoder_layers,
+        num_attention_heads=roberta.cfg.model.encoder_attention_heads,
+        intermediate_size=roberta.cfg.model.encoder_ffn_embed_dim,
         max_position_embeddings=514,
         type_vocab_size=1,
         layer_norm_eps=1e-5,  # PyTorch default used in fairseq
@@ -78,8 +83,8 @@ def convert_roberta_checkpoint_to_pytorch(
     model.roberta.embeddings.token_type_embeddings.weight.data = torch.zeros_like(
         model.roberta.embeddings.token_type_embeddings.weight
     )  # just zero them out b/c RoBERTa doesn't use them.
-    model.roberta.embeddings.LayerNorm.weight = roberta_sent_encoder.emb_layer_norm.weight
-    model.roberta.embeddings.LayerNorm.bias = roberta_sent_encoder.emb_layer_norm.bias
+    model.roberta.embeddings.LayerNorm.weight = roberta_sent_encoder.layernorm_embedding.weight
+    model.roberta.embeddings.LayerNorm.bias = roberta_sent_encoder.layernorm_embedding.bias
 
     for i in range(config.num_hidden_layers):
         # Encoder: start of layer
