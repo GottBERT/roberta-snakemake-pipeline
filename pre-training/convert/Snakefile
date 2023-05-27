@@ -23,7 +23,7 @@ rule all:
         ./scripts/convert_gottbert_original_pytorch_checkpoint_to_pytorch.py \
         --robert_checkpoint_file {input.file} --pytorch_dump_folder_path {output.dir} &> {log}
 
-        ./scripts/convert_vocab.py --indir {params.indir} --outdir {params.outdir} &>> {log}
+        ./scripts/convert_vocab.py --indir {params.indir} --outdir {params.outdir} --add-specials &>> {log}
 
         # check if models equal
         cat {log} | grep 🔥|| exit 1

@@ -8,8 +8,10 @@ snakemake -c $(nproc --a) --use-conda
 ```
 or directly pass the parameters to the snakemake command
 ```bash
-snakemake -c $(nproc --a) --use-conda --config file_checkpoint=../../files/checkpoints/checkpoint.pt \
-    pytorch_dump_folder_path=holyBERT
+CHECKPOINT=../../files/checkpoints/checkpoint.pt
+DUMP_NAME=holyBERT
+
+snakemake -c $(nproc --a) --use-conda --config file_checkpoint=$CHECKPOINT pytorch_dump_folder_path=$DUMP_NAME
 ```
 
 ## MaskedLM

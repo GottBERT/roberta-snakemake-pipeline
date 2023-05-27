@@ -13,42 +13,45 @@ def main():
   parser = argparse.ArgumentParser(description='')
   parser.add_argument('--indir', required=True)
   parser.add_argument('--outdir', required=True)
+  parser.add_argument('--add-specials', action='store_true',
+                      help='add <s>, <pad>, </s> and <unk>')
   args = parser.parse_args()
 
-  # create backup if not exists
-  # if not path.isfile(path.join(args.indir, 'vocab.json.bu')):
-  #   print('create backup of vocab.json')
-  #   copyfile(path.join(args.indir, 'vocab.json'), path.join(args.indir, 'vocab.json.bu'))
+  with open(path.join(args.indir, 'vocab.json')) as json_file:
+    data = json.load(json_file)
 
-  #   json_file = 'vocab.json'
-  # else:
-  #   json_file = 'vocab.json.bu'
+  inverted_data = {value: key for key, value in data.items()}
 
-  json_file = 'vocab.json'
+  dictionary = pd.read_csv(path.join(args.indir, 'dict.txt'), delimiter=" ", header=None, names=['index', 'count'])
 
-  # read dict.txt
-  dictionary = pd.read_csv(path.join(args.indir, 'dict.txt'), delimiter=" ", header=None, names=['entry', 'count'])
+  if getattr(args, 'add_specials', False):
+    json_result_inverted = {0:"<s>", 1:"<pad>", 2: "</s>", 3: "<unk>"}
+    k=4
+  else:
+    json_result_inverted = {}
+    k=0
 
-  with open(path.join(args.indir, json_file)) as f_json_file:
-    data = json.load(f_json_file)
 
-  last_index=data[list(data)[-1]]
-
-  # get madeup words
-  madeupwords = dictionary[
-    dictionary['entry'].astype("str").str.startswith("madeupword")
-  ]
-
-  for madeupword in list(madeupwords['entry']):
-    last_index = last_index+1
-
-    data[madeupword] = last_index
+  for key in dictionary['index']:
+    if not str(key).startswith('madeupword'):
+      json_result_inverted[k] = inverted_data[int(key)]
+    else:
+      json_result_inverted[k] = key
     
-  data['<mask>'] = last_index+1
+    k=k+1
 
-  # save hf converted vocab
-  with open(path.join(args.outdir, 'vocab.json'), 'w', encoding='utf-8') as f:
-    json.dump(data, f)
+  # add <mask> as last thing
+  json_result_inverted[k] = "<mask>"
+  
+  # sort
+  json_result_inverted_sorted = {}
+  for key in sorted(json_result_inverted.keys()):
+    json_result_inverted_sorted[key] = json_result_inverted[key]
+
+  json_result = {value: int(key) for key, value in json_result_inverted_sorted.items()}
+
+  with open(path.join(args.outdir, 'vocab.json'), 'w') as outfile:
+    json.dump(json_result, outfile, ensure_ascii=False)
 
   copyfile(path.join(args.indir, 'merges.txt'), path.join(args.outdir, 'merges.txt'))
 
