@@ -1,0 +1,11 @@
+configfile: "config.yaml"
+
+import os
+from pathlib import Path
+
+def output(file, output_dir = config['dir_output']):
+  return os.path.join(output_dir, file)
+
+
+rule all:
+    

@@ -1,0 +1,4 @@
+# directory or name (hf model hub) of model
+model_name=../pretraining/convert/output
+
+# 

@@ -1,0 +1,6 @@
+channels:
+  - conda-forge
+dependencies:
+  # - cudatoolkit==11.8.0
+  - pip:
+    - farm @ https://github.com/schmittkl/FARM/tree/master/farm
