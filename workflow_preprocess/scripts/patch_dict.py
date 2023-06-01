@@ -35,7 +35,7 @@ def main():
     ~dictionary['entry'].astype("str").str.startswith("madeupword")
   ].astype('int')
   
-  print(len(dictionary))
+  print(f"original dict.txt length: {len(dictionary)}")
   dict_list = list(dictionary['entry'])
 
   # add missing ones skipping special tokens (first 4 ones)
@@ -50,7 +50,7 @@ def main():
     dictionary = dictionary.append({'entry': f'madeupword{n:04}', 'count': 0}, ignore_index=True)
     n=n+1
 
-  print(len(dictionary))
+  print(f"patched dict.txt length: {len(dictionary)}")
 
   dictionary.to_csv(path.join(args.dir, 'dict.txt'), index=False, header=False, sep=" ")
 
