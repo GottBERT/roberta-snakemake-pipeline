@@ -1,7 +1,7 @@
 channels:
   - conda-forge
 dependencies:
-  - rust=1.51.0
+  - rust=1.69.0
   - cxx-compiler=1.0.0
   - pip:
     - tokenizers==0.10.2
