@@ -52,7 +52,14 @@ def enable_if_no_bpe(wildcards):
 rule shuffle_file:
   input: enable_if_no_bpe
   output: output('bpe_train/shuffled_file.raw')
-  shell: "shuf {input} > {output}"
+  shell: """
+  if [[ {config[corpus_already_shuffled]} = True ]]
+  then
+    ln -sr {input} {output}
+  else
+    shuf {input} > {output}
+  fi
+  """
 
 
 rule get_bpe_extract:

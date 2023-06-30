@@ -1,6 +1,9 @@
 # path to the in file, containing all data (one document per line)
 in_file: ../files/example/de_dedup.txt
 
+# if the in_file is already shuffled
+corpus_already_shuffled: True
+
 # how many bpe tokens should be user
 vocab_size: 520
 
