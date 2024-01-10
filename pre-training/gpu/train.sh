@@ -43,5 +43,5 @@ fairseq-train $DATA_DIR \
   --skip-invalid-size-inputs-valid-test \
   --save-interval-updates $SAVE_INTERVAL_UPDATES \
   --tensorboard-logdir $LOG_DIR \
-  --max-update $TOTAL_UPDATES &> training-$(date +"%Y-%m-%d_%H-%M-%S").log
+  --max-update $TOTAL_UPDATES &> "$DIR_OUTPUT/training-$(date +"%Y-%m-%d_%H-%M-%S").log"
 #   --num-workers 4 \
