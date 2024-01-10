@@ -4,6 +4,7 @@ export XLA_EVEN_HEARTBEAT_TIMEOUT=7200
 export XLA_UNEVEN_HEARTBEAT_TIMEOUT=7200
 
 TOTAL_UPDATES=100000          # Total number of training steps
+SAVE_INTERVAL_UPDATES=100000  # Save intervals (should be multiple of total updates)
 WARMUP_UPDATES=10000          # Warmup the learning rate over this many updates
 PEAK_LR=0.0004                # Peak learning rate, adjust as needed
 TOKENS_PER_SAMPLE=512         # Max sequence length
@@ -12,7 +13,7 @@ MAX_SENTENCES=64              # Number of sequences per batch (batch size)
 UPDATE_FREQ=16                # Increase the batch size 2x
 
 
-DIR_OUTPUT="/data/norberto"
+DIR_OUTPUT="/data/norberto/base"
 
 DATA_DIR="/data/norberto/bin"
 SAVE_DIR="$DIR_OUTPUT/checkpoints"
