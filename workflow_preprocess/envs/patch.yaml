@@ -1,5 +1,6 @@
 channels:
   - conda-forge
 dependencies:
-  - pip:
-    - pandas==1.2.1
+  - python=3.9
+  - pip=23.3.1
+  - pandas==1.2.1

@@ -1,7 +1,10 @@
 channels:
   - conda-forge
 dependencies:
-  - rust=1.69.0
+  - python=3.10
+  - rust=1.70.0  # Ensure latest Rust version (1.80.0 has issues)
   - cxx-compiler=1.5.2
+  - openssl  # Add OpenSSL support
+  - pkg-config  # Helps find OpenSSL paths
   - pip:
-    - tokenizers==0.13.3
+      - tokenizers==0.12.1

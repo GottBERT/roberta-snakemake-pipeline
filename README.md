@@ -4,9 +4,9 @@ GottBERT is a model architecture based on RoBERTa. It uses tokenizer from huggin
 
 ## Requirements
 - [anaconda](https://www.anaconda.com/products/individual#Downloads) or [miniconda](https://docs.conda.io/en/latest/miniconda.html)
-- [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html)
+- [snakemake](https://snakemake.readthedocs.io/en/v9.0.1/getting_started/installation.html)
 
-The current software is tested with anaconda using a python 3.11 version and Snakemake 7.25.0.
+The current software is tested with anaconda using a python 3.12.9 version and Snakemake 9.0.1.
 
 ## Data Preparation
 For preprocessing of data continue reading [here](workflow_preprocess/README.md).
