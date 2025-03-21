@@ -9,13 +9,19 @@ In order to let this script run properly, you need to prepare you data as follow
 ## Usage
 According to our experience a test and valid set file of about 3-5 MB should be sufficient. In case of GottBERT we used 12000 documents.
 Adjust `config.yaml` to your needs and run the pipeline by
-```
+```bash
 snakemake --use-conda -j$(nproc --all)
 ```
 
 If you want to rerun the pipeline, one needs to remove the folder `output`. 
 Also, if you already have a bpe, include the files `dict.txt`, `merges.txt` and `vocab.json` into `output/bpe_enc`.
 
+
+## Graph
+
+```bash
+snakemake --use-conda -j$(nproc --all) --rulegraph | dot -Tpdf > graph.pdf
+```
 
 ## Example
 In `../files/example/de_dedup.txt` lies a file which is a small extract of the German OSCAR corpus. We can use it for a small test computation.
