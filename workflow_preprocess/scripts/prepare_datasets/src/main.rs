@@ -109,7 +109,7 @@ fn main() -> std::io::Result<()> {
         for line in lines {
             if let Ok(mut document) = line {
                 // add empty new line
-                document.push_str("\n");
+                document.push_str("\n\n");
 
                 // find out in which file to write the line
                 if idx_test.contains(&count) {
