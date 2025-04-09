@@ -3,11 +3,18 @@
 set -euo pipefail
 
 # === CONFIGURE THESE ===
-INPUT_FILE="test/test.txt"                         # Input corpus file
-OUTPUT_FILE="test/test_split.txt"                       # Final output
-TOKENIZER_DIR="test/bpe_enc/"                  # Folder with vocab.json + merges.txt
-MAX_TOKENS=512                                 # Token limit per chunk (510 if RoBERTa)
+INPUT_FILE="/home/data/corpus/final/shuffled_coprus.txt"                         # Input corpus file
+OUTPUT_FILE="/home/data/corpus/final/shuffled_coprus_split.txt"                       # Final output
+TOKENIZER_DIR="/home/data/corpus/final/output/bpe_enc/"                  # Folder with vocab.json + merges.txt
+MAX_TOKENS=500                                 # Token limit per chunk (510 if RoBERTa)
 SCRIPT_PATH="./split_documents.py"             # Path to your Python script
+
+# # === CONFIGURE THESE ===
+# INPUT_FILE="test/test.txt"                         # Input corpus file
+# OUTPUT_FILE="test/test_split.txt"                       # Final output
+# TOKENIZER_DIR="/home/data/corpus/final/output/bpe_enc/"                  # Folder with vocab.json + merges.txt
+# MAX_TOKENS=512                                 # Token limit per chunk (510 if RoBERTa)
+# SCRIPT_PATH="./split_documents.py"             # Path to your Python script
 
 # === AUTO-DETECT CORES ===
 NUM_PARALLEL_JOBS=$(nproc)

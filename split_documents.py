@@ -7,10 +7,9 @@ import sys
 from tokenizers import ByteLevelBPETokenizer
 
 def split_if_too_long(document, max_tokens, tokenizer):
-    adjusted_max = max_tokens - 2  # account for special tokens
     encoding = tokenizer.encode(document, add_special_tokens=False)
 
-    if len(encoding.ids) <= adjusted_max:
+    if len(encoding.ids) <= max_tokens:
         return [document.strip() + "\n"]
 
     # Only now: split at sentence boundaries
@@ -21,8 +20,8 @@ def split_if_too_long(document, max_tokens, tokenizer):
         sys.stderr.write(f"[warn] No delimiters, doing hard token split: {document[:80]}...\n")
         ids = encoding.ids
         chunks = []
-        for i in range(0, len(ids), adjusted_max):
-            chunk_ids = ids[i:i + adjusted_max]
+        for i in range(0, len(ids), max_tokens):
+            chunk_ids = ids[i:i + max_tokens]
             chunk = tokenizer.decode(chunk_ids).strip() + "\n"
             chunks.append(chunk)
         return chunks
@@ -36,7 +35,7 @@ def split_if_too_long(document, max_tokens, tokenizer):
     for sentence in sentences:
         token_len = len(tokenizer.encode(sentence, add_special_tokens=False).ids)
 
-        if current_len + token_len <= adjusted_max:
+        if current_len + token_len <= max_tokens:
             current_chunk += " " + sentence if current_chunk else sentence
             current_len += token_len
         else:
