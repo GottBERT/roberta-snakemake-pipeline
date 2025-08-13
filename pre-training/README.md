@@ -1,4 +1,9 @@
 
+## Workflow Graph
+Below is a visualization of the pre-training workflow (see `media/pretrain/graph.png`):
+
+![Pre-training workflow graph](../media/pretrain/graph.png)
+
 # Pre-training
 
 This directory contains scripts and instructions for pre-training the GottBERT model using fairseq on both TPU and GPU. It covers environment setup, hardware recommendations, and usage tips for large-scale training.

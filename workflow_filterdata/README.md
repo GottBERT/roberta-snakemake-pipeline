@@ -17,7 +17,12 @@ Pipeline parameters can be set via the command line as shown above, or by editin
 
 Refer to the config file for detailed descriptions of all available options.
 
-## Output
+
+## Workflow Graph
+Below is a visualization of the filtering workflow (see `media/filter/graph.png`):
+
+![Filtering workflow graph](../media/filter/graph.png)
+
 The workflow will generate filtered and cleaned versions of your input data, along with intermediate files for each processing step. Output locations and formats are controlled by the configuration.
 
 

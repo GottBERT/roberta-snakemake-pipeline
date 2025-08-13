@@ -41,9 +41,10 @@ snakemake --use-conda --config in_file=../files/example/de_dedup.txt num_docs_va
 
 For further instructions about config parameters, see `config.yaml`. All parameters can be set there or via the command line.
 
-The pipeline processes the following steps:
 
-![Image of snakemake workflow](visualization.png)
+The pipeline processes the following steps (see `media/pretrain/graph.png`):
+
+![Preprocessing workflow graph](../media/pretrain/graph.png)
 
 ## Requirements
 See the main project [README](../README.md) for requirements. All other dependencies are managed automatically via the provided Conda environments.
