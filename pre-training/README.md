@@ -44,7 +44,15 @@ According to [this publication](https://www.aclweb.org/anthology/W18-6301.pdf), 
 
 ## GPU Training
 
-For GPU-based training, follow the [original fairseq documentation](https://github.com/pytorch/fairseq/blob/master/examples/roberta/README.pretraining.md).
+This repository provides several scripts for GPU-based pre-training, located in `pre-training/gpu/`:
+
+- **train.sh**: Standard masked language model (MLM) pre-training with fairseq.
+- **train_WWM.sh**: Pre-training with Whole Word Masking (WWM) enabled, using the `--mask-whole-words` flag and typically a larger model (e.g., `roberta_large`).
+- **train_continued_WWM.sh**: Continued pre-training from an existing checkpoint, with WWM and optimizer/dataloader/lr-scheduler reset for further domain adaptation or additional data.
+
+You may need to review and adapt the scripts to your data and hardware setup. See the script headers for environment variables and options.
+
+For custom setups or more details, you can also refer to the [original fairseq documentation](https://github.com/pytorch/fairseq/blob/master/examples/roberta/README.pretraining.md).
 
 
 ## Loading Your Pretrained Model
