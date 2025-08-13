@@ -1,21 +1,21 @@
 # path to the in file, containing all data (one document per line)
-in_file: /home/data/corpus/final/shuffled_coprus.txt
+in_file: ../files/example/de_dedup.txt
 
 # if the in_file is already shuffled
 corpus_already_shuffled: True
 
 # how many bpe tokens should be user
-vocab_size: 52000
+vocab_size: 520
 
 # number of randomly selected documents for the validation & test set
-num_docs_valid_test_set: 16000
+num_docs_valid_test_set: 120
 
 # size in bytes, with which BPE is created e.g.: 7GB = 7000000000
-size_bpe_train_file: 5000000000
+size_bpe_train_file: 4000
 
 # the number of splits created in parallel computation
 # usually this equals to `nproc --a`
-num_files: 32
+num_files: 12
 
 # set to false if sequential computation is desired
 # this might be in case of limited disk space 
@@ -31,4 +31,4 @@ bpe_apply_dir_tmp: /tmp
 language: German
 
 # output directory, relative from the workflow folder
-dir_output: '/home/data/corpus/final/output'
+dir_output: '../output'

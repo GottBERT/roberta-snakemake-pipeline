@@ -1,36 +1,77 @@
 # GottBERT
 
-GottBERT is a model architecture based on RoBERTa. It uses tokenizer from huggingface in order to compute a language specific GPT-2 BPE. This repository offers a snakemake workflow to pre-process data for a subsequent training with [fairseq](https://github.com/pytorch/fairseq).
+GottBERT is a German language model based on the RoBERTa architecture, pretrained from scratch on large-scale German text. It uses the Hugging Face GPT-2 BPE tokenizer for German-specific vocabulary. This repository provides a Snakemake workflow for efficient data preprocessing and pre-training, enabling seamless integration with our fork of fairseq: [gitlab.com/gottbert/fairseq](https://gitlab.com/gottbert/fairseq).
+
+## Features
+- End-to-end data preprocessing pipeline using Snakemake
+- Support for large-scale German text corpora
+- Easy integration with Hugging Face and our [fairseq fork](https://gitlab.com/gottbert/fairseq)
+- Scripts for model conversion and evaluation
+
 
 ## Requirements
-- [anaconda](https://www.anaconda.com/products/individual#Downloads) or [miniconda](https://docs.conda.io/en/latest/miniconda.html)
-- [snakemake](https://snakemake.readthedocs.io/en/v9.0.1/getting_started/installation.html)
+- [Anaconda](https://www.anaconda.com/products/individual#Downloads) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+- [Snakemake 9.0.1](https://snakemake.readthedocs.io/en/v9.0.1/getting_started/installation.html)
 
-The current software is tested with anaconda using a python 3.12.9 version and Snakemake 9.0.1.
+Tested with Python 3.12.9 and Anaconda.
 
-## Data Preparation
-For preprocessing of data continue reading [here](workflow_preprocess/README.md).
+
+## Quickstart
+1. **Clone the repository**
+      ```bash
+      git clone https://gitlab.com/gottbert/corpus
+      cd corpus
+      ```
+2. **Set up the environment**
+      ```bash
+      conda env create -f requirements.txt
+      conda activate gottbert
+      ```
+3. **Preprocess your data**
+      See [workflow_preprocess/README.md](workflow_preprocess/README.md) for detailed instructions.
+4. **Pre-train the model**
+      See [pre-training/README.md](pre-training/README.md) for training steps.
+5. **Use or convert the model**  
+      For model conversion and usage, see the following:
+      - Use with our fairseq fork as described in the [GottBERT example](https://gitlab.com/gottbert/fairseq/-/tree/master/examples/gottbert).
+      - Convert to Hugging Face Transformers format using provided scripts.
 
 ## Pre-Training
-For pre-training instructions, i.e. computation of the GottBERT model, read [here](pre-training/README.md).
+For pre-training instructions, including scripts for TPU/GPU training and environment setup, see the [pre-training](pre-training/README.md) folder.
 
-## Working with the resulting model
-After successfully pre-training a GottBERT model one can try it out with fairseq as described in [their documentation](https://github.com/pytorch/fairseq/blob/master/examples/gottbert/README.md).
-Another possibility is to convert the resulting model to transformer huggingface. 
+## Model Conversion
+To convert a fairseq-trained GottBERT model to Hugging Face Transformers format, see the scripts and instructions in the [pre-training/convert](pre-training/convert/README.md) folder.
+
 
 ## License
-The GottBERT model is MIT licensed.
+This project is licensed under the MIT License.
+
 
 ## Citation
-If you are using this code or our model, please cite as:
+If you use this code or model, please cite:
 
-```
-@misc{scheible2020gottbert,
-      title={GottBERT: a pure German Language Model},
-      author={Raphael Scheible and Fabian Thomczyk and Patric Tippmann and Victor Jaravine and Martin Boeker},
-      year={2020},
-      eprint={2012.02110},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+```bibtex
+@inproceedings{scheible-etal-2024-gottbert,
+    title = "{G}ott{BERT}: a pure {G}erman Language Model",
+    author = "Scheible, Raphael  and
+      Frei, Johann  and
+      Thomczyk, Fabian  and
+      He, Henry  and
+      Tippmann, Patric  and
+      Knaus, Jochen  and
+      Jaravine, Victor  and
+      Kramer, Frank  and
+      Boeker, Martin",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.1183/",
+    doi = "10.18653/v1/2024.emnlp-main.1183",
+    pages = "21237--21250"
 }
 ```

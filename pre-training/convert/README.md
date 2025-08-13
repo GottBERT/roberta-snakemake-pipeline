@@ -1,6 +1,7 @@
 # Convert fairseq to huggingface
 
-This snakemake pipeline just consists of a script which converts a fairseq computed GottBERT checkpoint, including all BPE files, into a huggingface compatible file format.
+
+This folder also contains utility scripts in the `misc` subfolder for fixing and testing fairseq checkpoints before conversion. If you encounter issues converting your fairseq checkpoint, you may need to adapt or fix the checkpoint format first. See `misc/formats.py` and `misc/formats_README.md` for details and usage examples.
 
 Just setup the `config.yaml` and run snakemake 
 ```bash
