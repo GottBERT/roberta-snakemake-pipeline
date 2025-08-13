@@ -53,8 +53,12 @@ assert isinstance(roberta.model, torch.nn.Module)
 ```
 
 
+
 ## Model Conversion
 To convert a fairseq-trained GottBERT model to Hugging Face Transformers format, see the scripts and instructions in the [convert](./convert/) folder.
+
+## Checkpoint Testing
+You can use [test.py](./test.py) to quickly check a model checkpoint on any machine (including a TPU node). This script loads a checkpoint and runs a fill-mask prediction for a given sentence. See the script for usage details and command-line options.
 
 ## Tips & Troubleshooting
 - Always ensure you have enough disk and RAM for large datasets.

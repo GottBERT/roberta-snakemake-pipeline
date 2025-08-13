@@ -13,9 +13,9 @@ MAX_SENTENCES=64              # Number of sequences per batch (batch size)
 UPDATE_FREQ=16                # Increase the batch size 2x
 
 
-DIR_OUTPUT="/data/portbert/base"
+DIR_OUTPUT="/data/norberto/base"
 
-DATA_DIR="/data/portbert/bin"
+DATA_DIR="/data/norberto/bin"
 SAVE_DIR="$DIR_OUTPUT/checkpoints"
 LOG_DIR="$DIR_OUTPUT/logs"
 

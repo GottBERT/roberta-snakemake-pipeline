@@ -15,3 +15,29 @@ If that's what you want to do, then you'll require the [gcloud sdk](https://clou
 
 ## Example usage
 
+### Plotting from a fairseq log file
+
+```bash
+python create_plot.py --logfile path/to/fairseq_train.log --output plot.pdf
+```
+
+### Syncing logs from a gcloud VM and plotting
+
+```bash
+# Sync logs from your TPU VM (requires gcloud SDK)
+bash gcloud_sync_plot.sh
+# Then plot as above
+python create_plot.py --logfile synced_log.log --output plot.pdf
+```
+
+### Live plotting with remote log syncing
+
+For live plotting with logs from a remote TPU VM, you need the `gcloud_sync_plot.sh` script (requires gcloud SDK):
+
+```bash
+watch -n 30 'bash gcloud_sync_plot.sh <TPU_VM_NAME> <LOG_FILE_ON_VM> [output_dir] [log_interval]'
+```
+
+The default for `log_interval` is 25 and output dir `./plot/`. This will periodically sync the log file from your TPU VM and update the PDF.
+In case of a PDF viewer which updates automatically, you can live watch the plot evolving.
+
