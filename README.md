@@ -12,8 +12,27 @@ GottBERT is a German language model based on the RoBERTa architecture, pretraine
 ## Requirements
 - [Anaconda](https://www.anaconda.com/products/individual#Downloads) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 - [Snakemake 9.0.1](https://snakemake.readthedocs.io/en/v9.0.1/getting_started/installation.html)
+- [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) (see below)
 
 Tested with Python 3.12.9 and Anaconda.
+## Submodules
+
+This repository uses git submodules for external dependencies. To clone with submodules, use:
+
+```bash
+git clone --recurse-submodules https://gitlab.com/gottbert/corpus
+```
+
+If you already cloned the repo, initialize submodules with:
+
+```bash
+git submodule update --init --recursive
+```
+
+### Included submodules
+- `external/fairseq`: [GottBERT fairseq fork (legacy version)](https://gitlab.com/gottbert/fairseq)
+      - This fork is used for compatibility with the original GottBERT pre-training scripts and data formats presented in this repo.
+      - For new projects, consider using the latest [fairseq](https://github.com/pytorch/fairseq) if possible.
 
 
 ## Quickstart
