@@ -7,6 +7,6 @@ dependencies:
   - pip:
     - transformers==4.29.2
     - torch==2.0.1
-    - fairseq @ git+https://github.com/scheiblr/fairseq@TPUv4_old
+    - fairseq @ git+https://gitlab.com/gottbert/fairseq
     - numpy==1.23.5
     - pandas==1.2.1
