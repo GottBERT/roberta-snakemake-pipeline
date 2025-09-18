@@ -15,8 +15,10 @@ dir = "/mnt/d/GottBERT/"
 log_interval = 25
 
 names = {
-    "large":"/run/media/raphaels/NTFS/HerBERT/large/fairseq/training-2023-09-12_11-11-45.log",
-    "base":"/run/media/raphaels/NTFS/HerBERT/base/fairseq/training-2023-09-18_22-15-19.log",
+    "filtered,large":"clean/large/fairseq/training-2023-06-12_11-54-06.log",
+    "filtered,base":"clean/base/fairseq/training-2023-06-08_09-04-32.log",
+    "large":"dirty/large/fairseq/training-2023-06-18_21-49-22.log",
+    "base":"dirty/base/fairseq/training-2020-07-23_11-19-57.log"
 }
 
 
