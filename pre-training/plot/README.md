@@ -8,12 +8,24 @@ Beyond that, as we computed our models on TPUs, we created a shell command, whic
 If that's what you want to do, then you'll require the [gcloud sdk](https://cloud.google.com/sdk/docs/quickstart).
 
 ## Requirements
-
 - python3
 - `pip install -r plot/requirements.txt`
 - [optional] [gcloud sdk](https://cloud.google.com/sdk/docs/quickstart)
 
-## Example usage
+## Perplexity Plotting
+
+`ppl_plot.py` can be used to visualize the perplexity curves from multiple fairseq log files. It parses log files, extracts perplexity values, and generates a combined plot for comparison.
+
+### Example usage
+
+Edit the `names` dictionary in `ppl_plot.py` to point to your log files, then run:
+
+```bash
+python ppl_plot.py
+```
+
+This will generate a file `perplexity-plot.png` with the perplexity curves for all specified models/logs.
+
 
 ### Plotting from a fairseq log file
 
