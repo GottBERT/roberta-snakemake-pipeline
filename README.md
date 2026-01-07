@@ -2,7 +2,13 @@
 
 A modular, Snakemake-based framework for preprocessing large-scale text and pretraining RoBERTa models with fairseq, including support for language-specific BPE tokenization.
 
-The pipeline has been used to train several RoBERTa-based language models, including GottBERT, GeistBERT, ChristBERT, and PortBERT.
+The pipeline has been used to train several RoBERTa-based language models,
+including [GottBERT](https://huggingface.co/GottBERT/),
+[GeistBERT](https://huggingface.co/GeistBERT),
+[ChristBERT](https://huggingface.co/ChristBERT),
+[HalleluBERT](https://huggingface.co/HalleluBERT),
+[SindBERT](https://huggingface.co/SindBERT),
+and [PortBERT](https://huggingface.co/PortBERT).
 
 This repository focuses on the software infrastructure.
 Model-specific details are described in the corresponding publications.
