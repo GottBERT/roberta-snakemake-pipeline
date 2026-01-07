@@ -3,4 +3,4 @@
 	url = https://github.com/moses-smt/mosesdecoder
 [submodule "external/fairseq"]
 	path = external/fairseq
-	url = https://gitlab.com/gottbert/fairseq
+	url = https://github.com/GottBERT/fairseq
