@@ -1,11 +1,11 @@
 # GottBERT
 
-GottBERT is a German language model based on the RoBERTa architecture, pretrained from scratch on large-scale German text. It uses the Hugging Face GPT-2 BPE tokenizer for German-specific vocabulary. This repository provides a Snakemake workflow for efficient data preprocessing and pre-training, enabling seamless integration with our fork of fairseq: [gitlab.com/gottbert/fairseq](https://gitlab.com/gottbert/fairseq).
+GottBERT is a German language model based on the RoBERTa architecture, pretrained from scratch on large-scale German text. It uses the Hugging Face GPT-2 BPE tokenizer for German-specific vocabulary. This repository provides a Snakemake workflow for efficient data preprocessing and pre-training, enabling seamless integration with our fork of fairseq: [https://github.com/GottBERT/fairseq](https://github.com/GottBERT/fairseq).
 
 ## Features
 - End-to-end data preprocessing pipeline using Snakemake
 - Support for large-scale German text corpora
-- Easy integration with Hugging Face and our [fairseq fork](https://gitlab.com/gottbert/fairseq)
+- Easy integration with Hugging Face and our [fairseq fork](https://github.com/GottBERT/fairseq)
 - Scripts for model conversion and evaluation
 
 
@@ -20,7 +20,7 @@ Tested with Python 3.12.9 and Anaconda.
 This repository uses git submodules for external dependencies. To clone with submodules, use:
 
 ```bash
-git clone --recurse-submodules https://gitlab.com/gottbert/corpus
+git clone --recurse-submodules https://github.com/GottBERT/fairseq
 ```
 
 If you already cloned the repo, initialize submodules with:
@@ -30,7 +30,7 @@ git submodule update --init --recursive
 ```
 
 ### Included submodules
-- `external/fairseq`: [GottBERT fairseq fork (legacy version)](https://gitlab.com/gottbert/fairseq)
+- `external/fairseq`: [GottBERT fairseq fork (legacy version)](https://github.com/GottBERT/fairseq)
       - This fork is used for compatibility with the original GottBERT pre-training scripts and data formats presented in this repo.
       - For new projects, consider using the latest [fairseq](https://github.com/pytorch/fairseq) if possible.
 
@@ -38,7 +38,7 @@ git submodule update --init --recursive
 ## Quickstart
 1. **Clone the repository**
       ```bash
-      git clone https://gitlab.com/gottbert/corpus
+      git clone https://github.com/GottBERT/corpus
       cd corpus
       ```
 2. **Set up the environment**
@@ -52,7 +52,7 @@ git submodule update --init --recursive
       See [pre-training/README.md](pre-training/README.md) for training steps.
 5. **Use or convert the model**  
       For model conversion and usage, see the following:
-      - Use with our fairseq fork as described in the [GottBERT example](https://gitlab.com/gottbert/fairseq/-/tree/master/examples/gottbert).
+      - Use with our fairseq fork as described in the [GottBERT example](https://github.com/GottBERT/fairseq/tree/master/examples/gottbert).
       - Convert to Hugging Face Transformers format using provided scripts.
 
 ## Pre-Training
