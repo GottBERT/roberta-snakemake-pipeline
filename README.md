@@ -1,10 +1,18 @@
-# GottBERT
+# RoBERTa Snakemake Pipeline
 
-GottBERT is a German language model based on the RoBERTa architecture, pretrained from scratch on large-scale German text. It uses the Hugging Face GPT-2 BPE tokenizer for German-specific vocabulary. This repository provides a Snakemake workflow for efficient data preprocessing and pre-training, enabling seamless integration with our fork of fairseq: [https://github.com/GottBERT/fairseq](https://github.com/GottBERT/fairseq).
+A modular, Snakemake-based framework for preprocessing large-scale text and pretraining RoBERTa models with fairseq, including support for language-specific BPE tokenization.
+
+The pipeline has been used to train several RoBERTa-based language models, including GottBERT, GeistBERT, ChristBERT, and PortBERT.
+
+This repository focuses on the software infrastructure.
+Model-specific details are described in the corresponding publications.
+The workflow integrates seamlessly with a custom fairseq fork:
+https://github.com/GottBERT/fairseq
 
 ## Features
 - End-to-end data preprocessing pipeline using Snakemake
 - Support for large-scale German text corpora
+- Language-specific BPE tokenization workflows
 - Easy integration with Hugging Face and our [fairseq fork](https://github.com/GottBERT/fairseq)
 - Scripts for model conversion and evaluation
 
