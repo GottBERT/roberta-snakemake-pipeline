@@ -6,9 +6,9 @@ The pipeline has been used to train several RoBERTa-based language models,
 including [GottBERT](https://huggingface.co/GottBERT/),
 [GeistBERT](https://huggingface.co/GeistBERT),
 [ChristBERT](https://huggingface.co/ChristBERT),
-[HalleluBERT](https://huggingface.co/HalleluBERT),
+[PortBERT](https://huggingface.co/PortBERT),
 [SindBERT](https://huggingface.co/SindBERT),
-and [PortBERT](https://huggingface.co/PortBERT).
+and [HalleluBERT](https://huggingface.co/HalleluBERT).
 
 This repository focuses on the software infrastructure.
 Model-specific details are described in the corresponding publications.
