@@ -52,8 +52,8 @@ git submodule update --init --recursive
 ## Quickstart
 1. **Clone the repository**
       ```bash
-      git clone https://github.com/GottBERT/corpus
-      cd corpus
+      git clone https://github.com/GottBERT/roberta-snakemake-pipeline.git
+      cd roberta-snakemake-pipeline
       ```
 2. **Set up the environment**
       ```bash
